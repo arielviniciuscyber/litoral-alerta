@@ -1,8 +1,6 @@
-# React + Vite
+# React + TailwindCSS 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
+O projeto integrador propõe soluções para minimizar os impactos dos alagamentos em Caraguatatuba, problema que se intensifica durante períodos de chuvas fortes. A iniciativa busca analisar as causas principais, como drenagem urbana insuficiente, ocupação irregular e acúmulo de resíduos, propondo medidas sustentáveis e eficazes. Entre as soluções estão a melhoria dos sistemas de escoamento, criação de áreas verdes permeáveis e campanhas de conscientização da população. Com isso, o projeto visa aumentar a segurança, qualidade de vida e a resiliência da cidade frente às mudanças climáticas.
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
