@@ -6,18 +6,20 @@ import Noticias from "./pages/Noticias"
 import Prevencao from "./pages/Prevencao"
 import Comunidade from "./pages/Comunidade"
 import SobreNos from './pages/SobreNos'
+import Login from './pages/Login'
 
 export default function App() {
   return (
     <>
       <Header />
-      
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/noticias" element={<Noticias />} />
         <Route path="/sobrenos" element={<SobreNos />} />
         <Route path="/prevencao" element={<Prevencao />} />
         <Route path="/comunidade" element={<Comunidade />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
 
       <Footer />
