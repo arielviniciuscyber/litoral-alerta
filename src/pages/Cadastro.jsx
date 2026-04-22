@@ -11,10 +11,10 @@ export default function Cadastro() {
   const [error, setError] = useState("");
 
   const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    username: "luan",
+    email: "luanmartins",
+    password: "1234",
+    confirmPassword: "1234",
   });
 
   function handleChange(e) {
