@@ -14,11 +14,11 @@ export default function Footer() {
 
                 {/* NAVEGAÇÃO DO MENU NO FOOTER*/}
                 <nav className=" flex gap-20 mx-auto text-lg font-bold">
-                    <a href="#" className="hover:text-gray-300">Home</a>                  
-                    <a href="#" className="hover:text-gray-300">Notícias</a>
-                    <a href="#" className="hover:text-gray-300">Sobre Nós</a>
-                    <a href="#" className="hover:text-gray-300">Prevenção</a>
-                    <a href="#" className="hover:text-gray-300">Comunidade</a>
+                    <a href="./home" className="hover:text-gray-300">Home</a>                  
+                    <a href="./noticias" className="hover:text-gray-300">Notícias</a>
+                    <a href="./sobrenos" className="hover:text-gray-300">Sobre Nós</a>
+                    <a href="./prevencao" className="hover:text-gray-300">Prevenção</a>
+                    <a href="./comunidade" className="hover:text-gray-300">Comunidade</a>
                 </nav>
                 <img src={logo} alt="Logo" className="w-35  " />
 

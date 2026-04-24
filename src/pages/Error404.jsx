@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function Error404() {
   return (
-    <div className="relative h-screen w-full flex items-center justify-center 
-    bg-[url('/fundo-error404.png')] bg-cover bg-center bg-no-repeat overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center 
+    bg-[url('/fundo-error404.png')] bg-cover bg-center bg-no-repeat overflow-hidden w-full">
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/60"></div>
