@@ -38,42 +38,79 @@ export default function SobreNos() {
         </h2>
 
         <div className="flex gap-7 justify-center">
-
           <div className="bg-white rounded-xl p-15 text-center w-93">
             <div className="text-4xl mb-3">⚠️</div>
-            <h3 className="font-bold text-2xl mb-2 text-black ">Alertas em tempo real</h3>
+            <h3 className="font-bold text-2xl mb-2 text-black ">
+              Alertas em tempo real
+            </h3>
             <p className="text-black text-lg">Notificação rápida e precisa</p>
           </div>
 
           <div className="bg-white rounded-xl p-15 text-center w-93">
             <div className="text-4xl mb-4">🛡️</div>
-            <h3 className="font-bold text-2xl mb-2 text-black">Dicas de prevenção</h3>
+            <h3 className="font-bold text-2xl mb-2 text-black">
+              Dicas de prevenção
+            </h3>
             <p className="text-black text-lg">Orientação para sua segurança</p>
           </div>
 
           <div className="bg-white rounded-xl p-15 text-center w-93">
             <div className="text-4xl mb-4">❤️</div>
-            <h3 className="font-bold text-2xl mb-2 text-black">Apoio à comunidade</h3>
+            <h3 className="font-bold text-2xl mb-2 text-black">
+              Apoio à comunidade
+            </h3>
             <p className="text-black text-lg">Auxílio em momentos de crise</p>
           </div>
-
         </div>
       </div>
       <div>
-        <h1 className="text-bold text-center text-black text-4xl p-9">Nossa Equipe</h1>
+        <h1 className="text-bold text-center text-black text-4xl p-9">
+          Nossa Equipe
+        </h1>
         <h2 className="text-3xl text-center mb-16 text-black">
           Conheça as pessoas por tras do nosso projeto
         </h2>
       </div>
-      {/* caixa da equipe */}
-      <div>
-        <div className="flex gap-7 justify-center"></div>
-<div>primeiro commit</div>
-        <div className="bg-gray-800 rounded-xl p-15 text-center w-76">
-            <h3 className="font-bold text-2xl mb-2 text-black ">Alertas em tempo real</h3>
-            <p className="text-black text-lg">Notificação rápida e precisa</p>
-          </div>
-      </div>
+     
+     <div className="flex gap-40 p-20 justify-center">
+
+  {/* Card Luan */}
+  <div className="bg-gray-800 rounded-xl  w-64 text-center">
+    <img src="/src/assets/luan.png" alt="Foto de luan"  />
+    <div className="px-4 pt-4 pb-4">
+      <h3 className="font-bold text-2xl mb-2 text-white">Luan Martins</h3>
+      <p className="text-gray-400 text-lg">UX/UI Designer</p>
+    </div>
+  </div>
+
+  {/* Card Ariel */}
+  <div className="bg-gray-800 rounded-xl overflow-hidden w-64 text-center">
+    <img src="/src/assets/ariel.png" alt="Foto de ariel" />
+    <div className="p-6">
+      <h3 className="font-bold text-2xl mb-2 text-white">Ariel Teixeira</h3>
+      <p className="text-gray-400 text-lg">Dev Frontend</p>
+    </div>
+  </div>
+
+  {/* Card 3 */}
+  <div className="bg-gray-800 rounded-xl overflow-hidden w-64 text-center">
+    <img src="/src/assets/perfil2.png" alt="Foto"  />
+    <div className="p-6">
+      <h3 className="font-bold text-2xl mb-2 text-white">Vanessa Gomes</h3>
+      <p className="text-gray-400 text-lg">Dev Backend</p>
+    </div>
+  </div>
+
+  {/* Card 4 */}
+  <div className="bg-gray-800 rounded-xl overflow-hidden w-64 text-center">
+    <img src="/src/assets/perfil2.png" alt="Foto" />
+    <div className="p-6">
+      <h3 className="font-bold text-2xl mb-2 text-white">Marcelo</h3>
+      <p className="text-gray-400 text-lg">Dev Mobile</p>
+    </div>
+  </div>
+
+</div>
     </div>
   );
 }
