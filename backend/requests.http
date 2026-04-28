@@ -1,0 +1,12 @@
+### Cadastrar usuário
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+  "username": "joaosilva",
+  "email": "joao@gmail.com",
+  "senha": "12345678"
+}
+
+### Listar notícias
+GET http://localhost:3000/noticias

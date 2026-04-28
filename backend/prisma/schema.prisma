@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Usuario {
+  id            Int      @id @default(autoincrement()) @db.UnsignedInt
+  username      String   @unique @db.VarChar(255)
+  nome          String?  @db.VarChar(50)
+  foto_perfil   String?  @db.VarChar(255)
+  email         String?  @db.VarChar(255)
+  senha         String?  @db.VarChar(80)
+  tipo          String?  @db.VarChar(45)
+  bio           String?  @db.VarChar(255)
+  local         String?  @db.VarChar(50)
+  data_cadastro DateTime @default(now()) @db.Timestamp(0)
+
+  publicacoes Publicacao[]
+  curtidas    Curtir[]
+  comentarios Comentario[]
+  seguindo    Seguir[]     @relation("Seguidor")
+  seguidores  Seguir[]     @relation("Seguido")
+
+  @@map("usuario")
+}
+
+model Publicacao {
+  id              Int      @id @default(autoincrement()) @db.UnsignedInt
+  resumo          String?  @db.VarChar(255)
+  slug            String?  @db.VarChar(255)
+  conteudo        String?  @db.Text
+  foto_capa       String?  @db.VarChar(255)
+  acessos         Int      @default(0)
+  tipo            String?  @db.VarChar(45)
+  data_publicacao DateTime @default(now()) @db.Timestamp(0)
+  usuario_id      Int      @db.UnsignedInt
+
+  usuario     Usuario      @relation(fields: [usuario_id], references: [id])
+  curtidas    Curtir[]
+  comentarios Comentario[]
+
+  @@index([usuario_id], map: "fk_noticia_usuario_idx")
+  @@map("publicacao")
+}
+
+model Curtir {
+  publicacao_id Int      @db.UnsignedInt
+  usuario_id    Int      @db.UnsignedInt
+  data          DateTime @default(now()) @db.Timestamp(0)
+
+  publicacao Publicacao @relation(fields: [publicacao_id], references: [id])
+  usuario    Usuario    @relation(fields: [usuario_id], references: [id])
+
+  @@id([publicacao_id, usuario_id])
+  @@index([usuario_id], map: "fk_publicacao_has_usuario_usuario1_idx")
+  @@index([publicacao_id], map: "fk_publicacao_has_usuario_publicacao1_idx")
+  @@map("curtir")
+}
+
+model Comentario {
+  id            Int      @id @default(autoincrement())
+  conteudo      String   @db.Text
+  data          DateTime @default(now()) @db.Timestamp(0)
+  usuario_id    Int      @db.UnsignedInt
+  publicacao_id Int      @db.UnsignedInt
+
+  usuario    Usuario    @relation(fields: [usuario_id], references: [id])
+  publicacao Publicacao @relation(fields: [publicacao_id], references: [id])
+
+  @@index([usuario_id], map: "fk_comentario_usuario1_idx")
+  @@index([publicacao_id], map: "fk_comentario_publicacao1_idx")
+  @@map("comentario")
+}
+
+model Seguir {
+  seguidor_id Int      @db.UnsignedInt
+  seguido_id  Int      @db.UnsignedInt
+  data        DateTime @default(now()) @db.Timestamp(0)
+
+  seguidor Usuario @relation("Seguidor", fields: [seguidor_id], references: [id])
+  seguido  Usuario @relation("Seguido", fields: [seguido_id], references: [id])
+
+  @@id([seguidor_id, seguido_id])
+  @@index([seguido_id], map: "fk_usuario_has_usuario_usuario2_idx")
+  @@index([seguidor_id], map: "fk_usuario_has_usuario_usuario1_idx")
+  @@map("seguir")
+}
