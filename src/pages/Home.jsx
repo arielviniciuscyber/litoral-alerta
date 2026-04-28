@@ -1,5 +1,11 @@
-import { useState } from "react"
+import { use, useState } from "react"
 import foto from "../assets/bannerhome.png"
+import prevencao from "../assets/cadastro.png"
+import comunidade from "../assets/comunidade.png"
+
+import hidrata from "../assets/use.png"
+import alerta from "../assets/monitore.png"
+import alagamento from "../assets/alagamento.png"
 
 export default function Home() {
   const [form, setForm] = useState({ username: "", email: "", senha: "" })
@@ -83,55 +89,52 @@ export default function Home() {
         <h2 className="text-xl font-semibold text-blue-900 mb-6">
           Como você pode se prevenir?
         </h2>
-        <div className="grid md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-xl p-4 shadow text-center">
-            <h3 className="font-bold">Itens impermeáveis</h3>
-            <p className="text-sm">Capa, botas e guarda-chuva</p>
-          </div>
-          <div className="bg-white rounded-xl p-4 shadow text-center">
-            <h3 className="font-bold">Hidrate-se</h3>
-            <p className="text-sm">Mesmo em dias frios</p>
-          </div>
-          <div className="bg-white rounded-xl p-4 shadow text-center">
-            <h3 className="font-bold">Higiene</h3>
-            <p className="text-sm">Evite doenças</p>
-          </div>
+
+        <div>
+          <img src={hidrata} className="w-full h-full object-cover rounded-xl shadow" />
+
         </div>
+
       </section>
 
       {/* ALERTAS */}
       <section className="mt-10 bg-blue-50 py-10">
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto px-6">
-          <div className="bg-white p-4 rounded-xl shadow text-center">
-            <h3 className="font-bold">Evite áreas alagadas</h3>
-            <p className="text-sm">Não passe por ruas inundadas</p>
-          </div>
-          <div className="bg-white p-4 rounded-xl shadow text-center">
-            <h3 className="font-bold">Não atravesse correntezas</h3>
-            <p className="text-sm">Risco alto de acidentes</p>
-          </div>
-          <div className="bg-white p-4 rounded-xl shadow text-center">
-            <h3 className="font-bold">Desligue energia</h3>
-            <p className="text-sm">Evite choques elétricos</p>
-          </div>
+        <div>
+          <img src={alerta} className="w-full h-full object-cover rounded-xl shadow" />
         </div>
       </section>
 
-      {/* COMUNIDADE */}
-      <section className="mt-10 bg-gradient-to-r from-blue-500 to-cyan-400 text-white p-10 flex justify-between items-center">
+      <section className="mt-10 bg-blue-50 py-10">
         <div>
-          <h2 className="text-2xl font-bold max-w-md">
-            Faça parte da nossa comunidade e fique ligado em tudo
-          </h2>
-          <button className="mt-4 bg-white text-blue-600 px-4 py-2 rounded-full">
-            Clique para entrar
-          </button>
+          <img src={alagamento} className="w-full h-full object-cover rounded-xl shadow" />
         </div>
       </section>
+
+
+      {/* COMUNIDADE */}
+      {/* <section className="mt-10 text-white p-10 flex justify-between items-center bg-[url(/cominidade.jpeg)] h-120 bg-cover bg-top rounded-xl shadow">
+        
+          <button className="self-end mt-4 bg-white/30 font-bold text-blue-600 px-4 py-2 rounded-full">
+            Clique para entrar
+          </button>
+
+      </section> */}
+
+      {/* COMUNIDADE */}
+      <section className="h-80 bg-radial from-white from-10% to-sky-600 ">
+        <div className="max-w-5xl mx-auto relative h-full flex flex-col items-start gap-10 justify-center px-6 text-blue-900">
+          <h2 className=" text-4xl font-bold max-w-md">Faça parte da nossa comunidade e fique ligado em tudo que acontece no nosso litoral!</h2>
+          <button className="mt-4 bg-white/30 text-blue-600 px-4 py-2 rounded-full" ><a href="http://localhost:5173/comunidade">Clique para entrar</a></button>
+
+          <img src={comunidade} className="absolute right-10 top-1/2 -translate-y-1/2  w-140 h-80"/>
+        </div>
+
+      </section>
+
 
       {/* FORM */}
       <section className="max-w-4xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
-        <h3 className="mb-4 font-semibold">Cadastre-se para receber alertas</h3>
+        <h3 className="text-4xl mb-4 font-semibold">Cadastre-se para receber alertas</h3>
 
         {status && (
           <p className={`mb-4 text-sm px-3 py-2 rounded-lg ${status === "sucesso" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
@@ -163,9 +166,14 @@ export default function Home() {
               value={form.senha}
               onChange={handleChange}
             />
+
+
           </div>
+
+
+
           <div className="flex items-center justify-center">
-            <div className="w-32 h-32 bg-gray-200 rounded-full" />
+            <img src={prevencao} className="w-65 h-65 bg-gray-200 rounded-full" />
           </div>
         </div>
 
