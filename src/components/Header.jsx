@@ -15,7 +15,7 @@ function Header() {
       <img src={logo} alt="Logo" className="w-40" />
 
       <nav className="flex items-center gap-32 flex-1 justify-center font-bold">
-        <NavLink to="/home" className={linkClass}>Home</NavLink>
+        <NavLink to="/" className={linkClass}>Home</NavLink>
         <NavLink to="/noticias" className={linkClass}>Notícias</NavLink>
         <NavLink to="/sobrenos" className={linkClass}>Sobre Nós</NavLink>
         <NavLink to="/prevencao" className={linkClass}>Prevenção</NavLink>
