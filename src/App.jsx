@@ -12,7 +12,7 @@ import Error404 from "./pages/Error404";
 
 export default function App() {
   const location = useLocation();
-
+// teste
   // páginas sem layout
   const hideLayout = ["/login", "/cadastro"].includes(
     location.pathname.toLowerCase()
