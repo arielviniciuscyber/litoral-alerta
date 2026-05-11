@@ -77,7 +77,7 @@ export default function NewsPage() {
             {heroNews.title}
           </h1>
           <button className="mt-3 bg-white/20 hover:bg-white/30 transition-colors backdrop-blur-sm text-white text-xs font-semibold border border-white/40 rounded px-4 py-1.5 w-fit">
-            Clique para saber mais
+            Clique aqui para saber mais
           </button>
         </div>
       </div>
