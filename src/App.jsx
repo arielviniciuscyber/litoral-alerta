@@ -9,6 +9,7 @@ import SobreNos from './pages/SobreNos'
 import Login from './pages/Login'
 import Cadastro from './pages/Cadastro'
 import Error404 from "./pages/Error404";
+import Notificacoes from './pages/Notificacoes'
 
 export default function App() {
   const location = useLocation();
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/sobrenos" element={<SobreNos />} />
           <Route path="/prevencao" element={<Prevencao />} />
           <Route path="/comunidade" element={<Comunidade />} />
+          <Route path="/notificacoes" element={<Notificacoes />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="*" element={<Error404 />} />
