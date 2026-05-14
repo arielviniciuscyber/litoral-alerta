@@ -144,7 +144,7 @@ export default function Prevencao() {
                 </div>
 
                 {/* Seção 2 */}
-                <div className="border border-blue-900 rounded-xl mb-6 overflow-hidden pb-10 ml-auto">
+                <div className="border border-blue-900 rounded-xl mb-6 pb-10 -mt-3">
                     <div className="flex items-center gap-4 px-6 py-4 ">
                         <span className="bg-blue-950 text-white font-black text-lg w-9 h-9 flex items-center justify-center rounded-md mt-7">2</span>
                         <h3 className="text-2xl font-black text-blue-950 uppercase tracking-wide mt-7">Busque locais altos</h3>
@@ -153,12 +153,12 @@ export default function Prevencao() {
                         <div className="flex items-center gap-4 border border-blue-900 rounded-lg p-3">
                             <div className="bg-blue-950 rounded-full w-11 h-11 flex items-center justify-center text-xl shrink-0">⬆️</div>
                             <div className="w-0.5 h-10 bg-blue-400 shrink-0" />
-                            <p className="text-gray-900 text-lg">Se a água começar a subir dentro de casa, suba para andares superiores imediatamente.</p>
+                            <p className="text-gray-900 text-xl">Se a água começar a subir dentro de casa, suba para andares superiores imediatamente.</p>
                         </div>
                         <div className="flex items-center gap-4 border border-blue-900 rounded-lg p-3 mt-7">
                             <div className="bg-blue-950 rounded-full w-11 h-11 flex items-center justify-center text-xl shrink-0">🪜</div>
                             <div className="w-0.5 h-10 bg-blue-400 shrink-0" />
-                            <p className="text-gray-900 text-lg">Leve documentos importantes, remédios e água potável.</p>
+                            <p className="text-gray-900 text-xl">Leve documentos importantes, remédios e água potável.</p>
                         </div>
                     </div>
                 </div>
