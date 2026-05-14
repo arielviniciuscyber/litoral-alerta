@@ -124,9 +124,9 @@ export default function Prevencao() {
             <div className="max-w-4xl mx-auto px-8 py-12">
 
                 {/* Seção 1 */}
-                <div className="border border-blue-900 rounded-xl mb-30 overflow-hidden mt-15 pb-10 ">
+                <div className="border border-blue-900 rounded-xl mb-30 overflow-hidden mt-15 pb-10 relative left-[-25%] shadow-2xl">
                     <div className="flex items-center gap-4 px-6 py-4">
-                        <span className="bg-blue-950 text-white font-black text-lg w-9 h-9 flex items-center justify-center rounded-md mt-8">1</span>
+                        <span className="bg-blue-900 text-white font-black text-lg w-9 h-9 flex items-center justify-center rounded-4xl mt-8">1</span>
                         <h3 className="text-2xl font-black text-blue-950 uppercase tracking-wide mt-7">Evite áreas alagadas</h3>
                     </div>
                     <div className="flex flex-col gap-3 px-6 pb-5 mt-7">
@@ -144,9 +144,10 @@ export default function Prevencao() {
                 </div>
 
                 {/* Seção 2 */}
-                <div className="border border-blue-900 rounded-xl mb-6 pb-10 -mt-3">
+                
+                <div className="border border-blue-900 rounded-xl mb-6 pb-10 -mt-9 relative left-[25%] shadow-2xl">
                     <div className="flex items-center gap-4 px-6 py-4 ">
-                        <span className="bg-blue-950 text-white font-black text-lg w-9 h-9 flex items-center justify-center rounded-md mt-7">2</span>
+                        <span className="bg-blue-900 text-white font-black text-lg w-9 h-9 flex items-center justify-center rounded-4xl mt-7">2</span>
                         <h3 className="text-2xl font-black text-blue-950 uppercase tracking-wide mt-7">Busque locais altos</h3>
                     </div>
                     <div className="flex flex-col gap-3 px-6 pb-5 mt-7">
@@ -162,29 +163,30 @@ export default function Prevencao() {
                         </div>
                     </div>
                 </div>
+                
 
                 {/* Seção 3 */}
-                <div className="border border-blue-200 rounded-xl mb-6 overflow-hidden">
-                    <div className="flex items-center gap-4 px-6 py-4">
-                        <span className="bg-blue-950 text-white font-black text-lg w-9 h-9 flex items-center justify-center rounded-md">3</span>
-                        <h3 className="text-base font-black text-blue-950 uppercase tracking-wide">Fique atento aos alertas oficiais</h3>
+                <div className="border border-blue-900 rounded-xl mb-6 overflow-hidden pb-10 mt-20 relative left-[-25%] shadow-2xl bg-blue-50 hover:scale-105 transition-transform duration-300">
+                    <div className="flex items-center gap-4 px-6 py-4 mt-7">
+                        <span className="bg-blue-900 text-white font-black text-lg w-9 h-9 flex items-center justify-center rounded-4xl">3</span>
+                        <h3 className="text-2xl font-black text-blue-950 uppercase tracking-wide ">Fique atento aos alertas oficiais</h3>
                     </div>
                     <div className="flex flex-col gap-3 px-6 pb-5">
-                        <div className="flex items-center gap-4 border border-blue-100 rounded-lg p-3">
-                            <div className="bg-blue-950 rounded-full w-11 h-11 flex items-center justify-center text-xl shrink-0">🔔</div>
-                            <div className="w-0.5 h-10 bg-blue-100 shrink-0" />
-                            <p className="text-gray-700 text-sm">Acompanhe os comunicados da Defesa Civil e canais governamentais e fique atento a alarmes sonoros.</p>
+                        <div className="flex items-center gap-4 border border-blue-900 rounded-lg p-3 mt-7 bg-white">
+                            <div className="bg-red-600 rounded-full w-11 h-11 flex items-center justify-center text-xl shrink-0">🔔</div>
+                            <div className="w-0.5 h-10 bg-blue-400 shrink-0" />
+                            <p className="text-gray-900 text-xl ">Acompanhe os comunicados da Defesa Civil e canais governamentais e fique atento a alarmes sonoros.</p>
                         </div>
-                        <div className="flex items-center gap-4 border border-blue-100 rounded-lg p-3">
-                            <div className="bg-blue-950 rounded-full w-11 h-11 flex items-center justify-center text-xl shrink-0">🌧️</div>
-                            <div className="w-0.5 h-10 bg-blue-100 shrink-0" />
-                            <p className="text-gray-700 text-sm">Se receber ordem de evacuação, saia imediatamente. Não volte para buscar pertences enquanto houver risco de inundação ou deslizamento.</p>
+                        <div className="flex items-center gap-4 border border-blue-900 rounded-lg p-3 mt-7 bg-white">
+                            <div className="bg-red-600 rounded-full w-11 h-11 flex items-center justify-center text-xl shrink-0">🌧️</div>
+                            <div className="w-0.5 h-10 bg-blue-400 shrink-0" />
+                            <p className="text-gray-900 text-xl">Se receber ordem de evacuação, saia imediatamente. Não volte para buscar pertences enquanto houver risco de inundação ou deslizamento.</p>
                         </div>
                     </div>
                 </div>
 
                 {/* Banner ajuda */}
-                <div className="bg-blue-950 rounded-xl p-5 flex items-center gap-4">
+                <div className="bg-blue-950 rounded-xl p-5 flex items-center gap-4 mt-25">
                     <div className="bg-blue-800 rounded-full w-11 h-11 flex items-center justify-center text-xl shrink-0">📞</div>
                     <div className="w-0.5 h-10 bg-blue-700 shrink-0" />
                     <div>
