@@ -80,7 +80,7 @@ export default function Cadastro() {
       {/* Card */}
       <form
         onSubmit={handleRegister}
-        className="relative z-10 w-[380px] p-8 rounded-2xl 
+        className="relative z-10 w-full max-w-[380px] mx-4 md:mx-0 p-8 rounded-2xl 
         bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl"
       >
 

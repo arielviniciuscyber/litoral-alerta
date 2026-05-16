@@ -1,4 +1,4 @@
-import { use, useState } from "react"
+import { useState } from "react"
 import foto from "../assets/bannerhome.png"
 import prevencao from "../assets/cadastro.png"
 import comunidade from "../assets/comunidade.png"
@@ -54,21 +54,21 @@ export default function Home() {
         className="h-[700px] bg-cover bg-center relative"
         style={{ backgroundImage: `url(${foto})` }}
       >
-        <div className="absolute inset-0 flex flex-col justify-center px-10 text-white">
-          <h1 className="text-3xl font-bold max-w-xl">
+        <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-10 text-white">
+          <h1 className="text-2xl md:text-3xl font-bold max-w-xl">
             Previsões aumentam o risco de chuvas fortes em 70% em Caraguatatuba 🚨
           </h1>
           <p className="mt-4">⚠️ Nível de risco: Alto</p>
           <p>🌧️ Precipitação esperada: 80mm</p>
         </div>
-        <div className="absolute right-6 top-1/2 bg-red-500 w-14 h-14 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+        <div className="absolute right-4 md:right-6 top-1/2 bg-red-500 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
           SOS
         </div>
       </section>
 
       {/* RESUMO */}
-      <section className="max-w-7xl mx-auto mt-25 bg-white rounded-xl shadow">
-        <h2 className="text-2xl font-semibold text-blue-900 text-center bg-blue-200 rounded-t-xl py-3 px-4">
+      <section className="max-w-7xl mx-4 md:mx-auto mt-20 md:mt-25 bg-white rounded-xl shadow">
+        <h2 className="text-xl md:text-2xl font-semibold text-blue-900 text-center bg-blue-200 rounded-t-xl py-3 px-4">
           Resumo da semana
         </h2>
         <div className="p-6">
@@ -90,51 +90,50 @@ export default function Home() {
           Como você pode se prevenir?
         </h2>
 
-        <div>
-          <img src={hidrata} className="w-full h-full object-cover rounded-xl shadow" />
-
+      
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <img src={hidrata} className="w-full h-auto object-cover rounded-xl shadow" />
         </div>
 
       </section>
 
       {/* ALERTAS */}
       <section className="mt-10 bg-blue-50 py-10">
-        <div>
-          <img src={alerta} className="w-full h-full object-cover rounded-xl shadow" />
-        </div>
+      
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <img src={alerta} className="w-full h-auto object-cover rounded-xl shadow" />
+        </div>  
       </section>
+
+      {/* ALAGAMENTOS */}
 
       <section className="mt-10 bg-blue-50 py-10">
-        <div>
-          <img src={alagamento} className="w-full h-full object-cover rounded-xl shadow" />
+   
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <img src={alagamento} className="w-full h-auto object-cover rounded-xl shadow" />
         </div>
       </section>
 
 
-      {/* COMUNIDADE */}
-      {/* <section className="mt-10 text-white p-10 flex justify-between items-center bg-[url(/cominidade.jpeg)] h-120 bg-cover bg-top rounded-xl shadow">
-        
-          <button className="self-end mt-4 bg-white/30 font-bold text-blue-600 px-4 py-2 rounded-full">
-            Clique para entrar
-          </button>
-
-      </section> */}
 
       {/* COMUNIDADE */}
-      <section className="h-80 bg-radial from-white from-10% to-sky-600 ">
-        <div className="max-w-5xl mx-auto relative h-full flex flex-col items-start gap-10 justify-center px-6 text-blue-900">
-          <h2 className=" text-4xl font-bold max-w-md">Faça parte da nossa comunidade e fique ligado em tudo que acontece no nosso litoral!</h2>
-          <button className="mt-4 bg-white/30 text-blue-600 px-4 py-2 rounded-full" ><a href="http://localhost:5173/comunidade">Clique para entrar</a></button>
-
-          <img src={comunidade} className="absolute right-10 top-1/2 -translate-y-1/2  w-140 h-80"/>
+      <section className="min-h-[20rem] py-10 md:py-0 md:h-80 bg-radial from-white from-10% to-sky-600 relative overflow-hidden">
+        <div className="max-w-5xl mx-auto relative h-full flex flex-col md:flex-row items-center md:items-start gap-10 justify-center px-6 text-blue-900">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left z-10 w-full md:w-1/2 md:mt-20">
+            <h2 className="text-3xl md:text-4xl font-bold max-w-md">Faça parte da nossa comunidade e fique ligado em tudo que acontece no nosso litoral!</h2>
+            <button className="mt-6 bg-white/50 text-blue-800 px-6 py-2 rounded-full font-bold hover:bg-white/80 transition-colors">
+              <a href="http://localhost:5173/comunidade">Clique para entrar</a>
+            </button>
+          </div>
+          <img src={comunidade} className="relative md:absolute md:right-10 md:top-1/2 md:-translate-y-1/2 w-full max-w-[300px] md:max-w-none md:w-[500px] md:h-80 object-contain z-0" />
         </div>
 
       </section>
 
 
       {/* FORM */}
-      <section className="max-w-4xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
-        <h3 className="text-4xl mb-4 font-semibold">Cadastre-se para receber alertas</h3>
+      <section className="max-w-4xl mx-4 md:mx-auto mt-10 mb-10 bg-white p-6 rounded-xl shadow">
+        <h3 className="text-2xl md:text-4xl mb-4 font-semibold text-center md:text-left">Cadastre-se para receber alertas</h3>
 
         {status && (
           <p className={`mb-4 text-sm px-3 py-2 rounded-lg ${status === "sucesso" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
@@ -172,8 +171,8 @@ export default function Home() {
 
 
 
-          <div className="flex items-center justify-center">
-            <img src={prevencao} className="w-65 h-65 bg-gray-200 rounded-full" />
+          <div className="flex items-center justify-center mt-6 md:mt-0">
+            <img src={prevencao} className="w-40 h-40 md:w-65 md:h-65 object-cover bg-gray-200 rounded-full" />
           </div>
         </div>
 

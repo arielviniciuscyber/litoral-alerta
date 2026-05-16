@@ -104,7 +104,7 @@ export default function NewsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="px-4 py-3 flex gap-3">
+      <div className="px-4 py-3 flex flex-wrap gap-3">
         <button
           onClick={() => handleTabChange("recentes")}
           className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${

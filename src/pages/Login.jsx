@@ -77,7 +77,7 @@ export default function Login() {
       {/* Card */}
       <form
         onSubmit={handleLogin}
-        className="relative z-10 w-95 p-8 rounded-2xl 
+        className="relative z-10 w-full max-w-[380px] mx-4 md:mx-0 p-8 rounded-2xl 
         bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl
         animate-fade-in"
       >
