@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Eye, EyeOff, User, Lock, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/icone-logo.png";
+import BubbleBackground from "../components/BubbleBackground";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -59,9 +60,8 @@ export default function Login() {
   }
 
   return (
-    <div className="h-screen w-full flex items-center justify-center bg-[url('/fundo-login.png')] bg-cover bg-center bg-no-repeat">
-
-      <div className="absolute inset-0 bg-black/40"></div>
+    <div className="h-screen w-full flex items-center justify-center relative">
+      <BubbleBackground />
 
       {/* 🔙 Botão voltar */}
       <button
@@ -78,7 +78,7 @@ export default function Login() {
       <form
         onSubmit={handleLogin}
         className="relative z-10 w-full max-w-[380px] mx-4 md:mx-0 p-8 rounded-2xl 
-        bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl
+        bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl
         animate-fade-in"
       >
 
