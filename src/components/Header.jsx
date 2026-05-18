@@ -23,7 +23,7 @@ function Header() {
   return (
     <>
       <header className="h-20 bg-[#0F172A] text-blue-500 flex items-center p-4 relative z-50">
-        <img src={logo} alt="Logo" className="w-40" />
+        <img src={logo} alt="Logo" className="w-40" cursor={"pointer"} onClick={() => navigate("/")} />
 
         {/* NAV DESKTOP */}
         <nav className="hidden md:flex items-center gap-32 flex-1 justify-center font-bold">
