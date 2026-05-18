@@ -67,10 +67,11 @@ export default function Home() {
       </section>
 
       {/* RESUMO */}
-      <section className="max-w-7xl mx-4 md:mx-auto mt-20 md:mt-25 bg-white rounded-xl shadow">
+      <section className="max-w-7xl mx-4 md:mx-auto mt-20 md:mt-25 bg-white rounded-xl shadow border border-gray-400">
         <h2 className="text-xl md:text-2xl font-semibold text-blue-900 text-center bg-blue-200 rounded-t-xl py-3 px-4">
           Resumo da semana
         </h2>
+
         <div className="p-6">
           <ul className="space-y-3 text-bg text-xl">
             <li>📍 Temporal no litoral norte de SP causa alagamentos</li>
@@ -78,6 +79,7 @@ export default function Home() {
             <li className="mt-8">📍 Deslizamentos deixam cidades em alerta</li>
             <li className="mt-8">📍 Queda de árvores registrada</li>
           </ul>
+
           <button className="mt-8 bg-blue-700 text-white px-6 py-2 rounded-lg flex">
             Saber mais
           </button>
@@ -90,7 +92,7 @@ export default function Home() {
           Como você pode se prevenir?
         </h2>
 
-      
+
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <img src={hidrata} className="w-full h-auto object-cover rounded-xl shadow" />
         </div>
@@ -99,16 +101,16 @@ export default function Home() {
 
       {/* ALERTAS */}
       <section className="mt-10 bg-blue-50 py-10">
-      
+
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <img src={alerta} className="w-full h-auto object-cover rounded-xl shadow" />
-        </div>  
+        </div>
       </section>
 
       {/* ALAGAMENTOS */}
 
       <section className="mt-10 py-10">
-   
+
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <img src={alagamento} className="w-full h-auto object-cover rounded-xl shadow" />
         </div>
@@ -129,7 +131,7 @@ export default function Home() {
         </div>
 
       </section>
-      
+
 
       {/* FORM */}
       <section className="max-w-4xl mx-4 md:mx-auto mt-10 mb-10 bg-white p-6 rounded-xl shadow">
