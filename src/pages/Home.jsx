@@ -86,7 +86,7 @@ export default function Home() {
 
       {/* PREVENÇÃO */}
       <section className="mt-10 px-6">
-        <h2 className="text-xl font-semibold text-blue-900 mb-6">
+        <h2 className="text-center text-2xl font-semibold text-blue-900 mb-6 mt-25">
           Como você pode se prevenir?
         </h2>
 
@@ -107,7 +107,7 @@ export default function Home() {
 
       {/* ALAGAMENTOS */}
 
-      <section className="mt-10 bg-blue-50 py-10">
+      <section className="mt-10 py-10">
    
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <img src={alagamento} className="w-full h-auto object-cover rounded-xl shadow" />
@@ -129,7 +129,7 @@ export default function Home() {
         </div>
 
       </section>
-
+      
 
       {/* FORM */}
       <section className="max-w-4xl mx-4 md:mx-auto mt-10 mb-10 bg-white p-6 rounded-xl shadow">
@@ -145,7 +145,7 @@ export default function Home() {
           <div>
             <input
               className="w-full border p-2 rounded mb-2"
-              placeholder="Usuário"
+              placeholder="Nome"
               name="username"
               value={form.username}
               onChange={handleChange}

@@ -139,8 +139,8 @@ export default function Login() {
 
         {/* CHECKBOX */}
         <div className="flex items-center text-white text-sm mb-4">
-          <input type="checkbox" className="mr-2" />
-          Lembrar mais tarde
+          <input type="checkbox" className="mr-2" id="lembrar" />          
+          <label htmlFor="lembrar">Lembrar mais tarde</label>
         </div>
 
         {/* ESQUECI */}
