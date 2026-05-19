@@ -269,16 +269,40 @@ export default function Home() {
               Entrar na Comunidade
             </motion.a>
           </div>
-          <div className="flex-1 flex justify-center md:justify-end items-end">
-            <motion.img 
-              initial={{ x: 50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              src={comunidade} 
-              className="w-full max-w-[600px] lg:max-w-[750px] drop-shadow-2xl hover:-translate-y-2 transition-transform duration-500 md:scale-125 lg:scale-150 origin-bottom md:translate-y-4" 
-              alt="Comunidade" 
-            />
+          <div className="flex-1 flex justify-center md:justify-end">
+            <div className="relative w-full max-w-[500px] lg:max-w-[600px]">
+              {/* Efeito de brilho sutil atrás da foto */}
+              <div className="absolute inset-0 bg-blue-400 rounded-3xl blur-[40px] opacity-20 -z-10"></div>
+              
+              <motion.img 
+                initial={{ x: 50, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop" 
+                className="w-full h-[400px] lg:h-[450px] object-cover rounded-3xl shadow-2xl border border-white/50 hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(0,0,0,0.15)] transition-all duration-500" 
+                alt="Comunidade Unida" 
+              />
+              
+              {/* Badge Flutuante */}
+              <motion.div 
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8, type: "spring" }}
+                className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-4"
+              >
+                <div className="flex -space-x-3">
+                  <img className="w-10 h-10 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" alt="User 1" />
+                  <img className="w-10 h-10 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop" alt="User 2" />
+                  <img className="w-10 h-10 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop" alt="User 3" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Membros Ativos</p>
+                  <p className="font-display font-bold text-slate-900">+1.240</p>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </motion.section>
