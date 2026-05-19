@@ -39,7 +39,7 @@ function Header() {
 
   const positionClass = isHome ? "fixed top-0 left-0 w-full" : "sticky top-0 w-full"
   const bgClass = isScrolled 
-    ? "bg-slate-900/85 backdrop-blur-md shadow-lg" 
+    ? "bg-slate-900/85 backdrop-blur-xl shadow-lg border-b border-slate-800/50" 
     : (isHome ? "bg-transparent" : "bg-[#0F172A]")
 
   return (
@@ -69,7 +69,7 @@ function Header() {
             {/* BOTÃO NOTIFICAÇÕES */}
             <button
               onClick={() => navigate("/notificacoes")}
-              className="relative p-2 rounded-full hover:bg-slate-800 transition-colors group"
+              className="relative p-2 rounded-full hover:bg-slate-800 active:scale-95 transition-all group"
               title="Notificações"
             >
               <img
@@ -84,7 +84,7 @@ function Header() {
             {/* BOTÃO PERFIL */}
             <button
               onClick={() => navigate("/login")}
-              className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-transparent hover:ring-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all"
+              className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-transparent hover:ring-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] active:scale-95 transition-all"
               title="Meu Perfil"
             >
               <img

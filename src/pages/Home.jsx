@@ -1,5 +1,6 @@
 import { useState } from "react"
 import toast from "react-hot-toast"
+import { motion } from "framer-motion"
 import bannerVideo from "../assets/tempestade.mp4"
 import prevencao from "../assets/cadastro.png"
 import comunidade from "../assets/comunidade.png"
@@ -120,77 +121,177 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RESUMO */}
-      <section className="max-w-7xl mx-4 md:mx-auto mt-20 md:mt-25 bg-white rounded-xl shadow border border-gray-400">
-        <div className="flex flex-col md:flex-row justify-between items-center bg-blue-200 rounded-t-xl py-3 px-6">
-          <h2 className="text-xl md:text-2xl font-semibold text-blue-900 w-full text-center">
-            Resumo da semana
-          </h2>
-        </div>
-
-        <div className="p-6">
-          <ul className="space-y-3 text-bg text-xl">
-            <li>📍 Temporal no litoral norte de SP causa alagamentos</li>
-            <li className="mt-8">📍 Resgates em Ubatuba após enchentes</li>
-            <li className="mt-8">📍 Deslizamentos deixam cidades em alerta</li>
-            <li className="mt-8">📍 Queda de árvores registrada</li>
-          </ul>
-
-          <button className="mt-8 bg-blue-700 text-white px-6 py-2 rounded-lg flex">
-            Saber mais
+      {/* RESUMO DA SEMANA (DESIGN BENTO GRID PREMIUM) */}
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto mt-20 md:mt-32 px-6"
+      >
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <span className="font-display inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 font-bold text-xs uppercase tracking-widest mb-4 border border-blue-100">Panorama Geral</span>
+            <h2 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Resumo da Semana</h2>
+          </div>
+          <button className="hidden md:flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors group">
+            Ver todas as notícias 
+            <span className="bg-blue-100 p-2 rounded-full group-hover:translate-x-1 transition-transform">→</span>
           </button>
         </div>
-      </section>
 
-      {/* PREVENÇÃO */}
-      <section className="mt-10 px-6">
-        <h2 className="text-center text-2xl font-semibold text-blue-900 mb-6 mt-25">
-          Como você pode se prevenir?
-        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Card Destaque (Span 2) */}
+          <motion.div whileHover={{ y: -5 }} className="md:col-span-2 bg-gradient-to-br from-blue-900 via-blue-950 to-slate-900 rounded-3xl p-8 lg:p-10 relative overflow-hidden group cursor-pointer shadow-2xl shadow-blue-900/20">
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 group-hover:bg-blue-400/30 transition-all duration-700"></div>
+            <div className="relative z-10">
+              <span className="inline-block px-4 py-1.5 bg-white/10 border border-white/20 text-white rounded-full text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-md">Alerta Urgente</span>
+              <h3 className="font-display font-extrabold text-3xl lg:text-4xl text-white mb-4 max-w-lg leading-tight">Temporal histórico atinge o litoral norte de SP</h3>
+              <p className="text-blue-100/80 text-lg max-w-lg leading-relaxed mb-8">Índices pluviométricos batem recorde e causam alagamentos extremos. Vias principais seguem interditadas na região metropolitana da baixada.</p>
+              <div className="inline-flex items-center gap-3 text-white font-bold bg-white/10 hover:bg-white/20 px-6 py-3 rounded-xl backdrop-blur-md transition-colors border border-white/10">
+                Acompanhar Cobertura <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </div>
+          </motion.div>
 
+          {/* Card Secundário 1 */}
+          <motion.div whileHover={{ y: -5 }} className="bg-white rounded-3xl p-8 relative overflow-hidden group cursor-pointer shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 flex flex-col justify-between">
+            <div>
+              <div className="w-14 h-14 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">🚁</div>
+              <h3 className="font-display font-bold text-slate-800 text-2xl mb-3 leading-snug">Resgates em Ubatuba</h3>
+              <p className="text-slate-500 leading-relaxed text-lg">Ação rápida e ostensiva do Corpo de Bombeiros salva 40 famílias após enchentes no fim de semana.</p>
+            </div>
+          </motion.div>
 
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <img src={hidrata} className="w-full h-auto object-cover rounded-xl shadow" />
+          {/* Card Secundário 2 */}
+          <motion.div whileHover={{ y: -5 }} className="bg-white rounded-3xl p-8 relative overflow-hidden group cursor-pointer shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 flex flex-col justify-between">
+            <div>
+              <div className="w-14 h-14 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">⚠️</div>
+              <h3 className="font-display font-bold text-slate-800 text-2xl mb-3 leading-snug">Risco de Deslizamentos</h3>
+              <p className="text-slate-500 leading-relaxed text-lg">Defesa Civil decreta Estado de Atenção na serra e recomenda evacuação de áreas de risco nas próximas 48h.</p>
+            </div>
+          </motion.div>
+
+          {/* Card Horizontal (Span 2) */}
+          <motion.div whileHover={{ y: -5 }} className="md:col-span-2 bg-gradient-to-r from-slate-50 to-white rounded-3xl p-8 relative overflow-hidden group cursor-pointer border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.06)] transition-all duration-500">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+               <div className="flex-1">
+                 <span className="inline-block px-4 py-1.5 bg-slate-200/70 text-slate-700 rounded-full text-xs font-bold tracking-widest uppercase mb-4">Trânsito & Vias</span>
+                 <h3 className="font-display font-bold text-slate-800 text-2xl md:text-3xl mb-3">Queda de árvores nas rodovias</h3>
+                 <p className="text-slate-500 text-lg max-w-xl">Múltiplas quedas registradas na Rodovia Rio-Santos devido aos ventos de 80km/h. Trânsito operando no sistema pare-e-siga.</p>
+               </div>
+               <div className="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center text-4xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 border border-slate-50 shrink-0">
+                 🌲
+               </div>
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* INFORMAÇÕES VITAIS (CARDS EXPANSIVOS SOFISTICADOS) */}
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto mt-24 md:mt-32 px-6"
+      >
+        <div className="text-center mb-16">
+          <span className="font-display text-sm font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-4 py-1.5 rounded-full border border-blue-100">Educação e Prevenção</span>
+          <h2 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 mt-6 tracking-tight">O conhecimento que salva vidas.</h2>
+          <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto mt-6">Manuais interativos e diretrizes oficiais da Defesa Civil para você proteger sua família antes, durante e depois da tempestade.</p>
         </div>
 
-      </section>
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          {[
+            { title: "Guia de Prevenção", desc: "Aprenda a criar um kit de emergência, proteger documentos importantes e fortificar sua residência antes da chegada de ciclones e tempestades severas.", color: "from-emerald-700 via-teal-900 to-slate-900", icon: "🛡️" },
+            { title: "Sistema de Alertas", desc: "Entenda a diferença entre Alerta Amarelo, Laranja e Vermelho. Saiba como receber notificações prioritárias diretamente via SMS ou Push.", color: "from-blue-700 via-indigo-900 to-slate-900", icon: "🚨" },
+            { title: "Rotas Seguras", desc: "Mapeamento em tempo real de áreas de alto risco, ruas com histórico de alagamento e rotas de evacuação em direção aos abrigos municipais.", color: "from-amber-700 via-orange-900 to-slate-900", icon: "🗺️" },
+          ].map((card, i) => (
+            <motion.div 
+              key={i} 
+              whileHover={{ y: -10 }} 
+              className={`relative h-[380px] lg:h-[420px] rounded-[2rem] overflow-hidden group cursor-pointer shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.2)] transition-all duration-700 bg-gradient-to-br ${card.color}`}
+            >
+              {/* Efeito de Brilho Dinâmico simulando vidro iluminado */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-white/10 transition-all duration-700 group-hover:scale-150"></div>
+              
+              {/* Vignette escura na base para garantir leitura */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/10 to-transparent pointer-events-none"></div>
 
-      {/* ALERTAS */}
-      <section className="mt-10 bg-blue-50 py-10">
+              {/* Ícone no topo */}
+              <div className="absolute top-6 right-6 w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex items-center justify-center text-2xl shadow-lg opacity-80 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-500">
+                {card.icon}
+              </div>
 
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <img src={alerta} className="w-full h-auto object-cover rounded-xl shadow" />
+              {/* Conteúdo Inferior com Efeito Parallax/Reveal */}
+              <div className="absolute bottom-0 left-0 w-full p-8 translate-y-12 group-hover:translate-y-0 transition-transform duration-700 ease-out z-10">
+                <div className="w-12 h-1 bg-white/30 rounded-full mb-6 group-hover:w-24 group-hover:bg-white/80 transition-all duration-700"></div>
+                <h3 className="font-display font-extrabold text-3xl lg:text-4xl text-white mb-4 drop-shadow-md">{card.title}</h3>
+                <p className="text-slate-200/90 text-lg leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100">
+                  {card.desc}
+                </p>
+                <div className="mt-8 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200">
+                  <span className="inline-flex items-center gap-3 text-white font-bold bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl hover:bg-white/20 transition-colors border border-white/20">
+                    Ler Material Completo <span className="text-xl">↗</span>
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </section>
-
-      {/* ALAGAMENTOS */}
-
-      <section className="mt-10 py-10">
-
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <img src={alagamento} className="w-full h-auto object-cover rounded-xl shadow" />
-        </div>
-      </section>
+      </motion.section>
 
 
 
       {/* COMUNIDADE */}
-      <section className="min-h-[20rem] py-10 md:py-0 md:h-80 bg-radial from-white from-10% to-sky-600 relative overflow-hidden">
-        <div className="max-w-5xl mx-auto relative h-full flex flex-col md:flex-row items-center md:items-start gap-10 justify-center px-6 text-blue-900">
-          <div className="flex flex-col items-center md:items-start text-center md:text-left z-10 w-full md:w-1/2 md:mt-20">
-            <h2 className="text-3xl md:text-4xl font-bold max-w-md">Faça parte da nossa comunidade e fique ligado em tudo que acontece no nosso litoral!</h2>
-            <button className="mt-6 bg-white/50 text-blue-800 px-6 py-2 rounded-full font-bold hover:bg-white/80 transition-colors">
-              <a href="http://localhost:5173/comunidade">Clique para entrar</a>
-            </button>
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="mt-20 md:mt-32 py-20 bg-gradient-to-br from-blue-50 to-blue-100 relative overflow-hidden"
+      >
+        <div className="max-w-6xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center gap-12">
+          <div className="flex-1 text-center md:text-left">
+            <h2 className="font-display text-3xl md:text-5xl font-extrabold text-blue-950 mb-6 leading-tight">
+              Junte-se à nossa comunidade
+            </h2>
+            <p className="text-slate-600 text-lg md:text-xl mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed">
+              Compartilhe informações em tempo real, receba atualizações dos seus vizinhos e construa uma rede de proteção civil junto conosco.
+            </p>
+            <motion.a 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="/comunidade" 
+              className="inline-block font-display bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all text-lg"
+            >
+              Entrar na Comunidade
+            </motion.a>
           </div>
-          <img src={comunidade} className="relative md:absolute md:right-10 md:top-1/2 md:-translate-y-1/2 w-full max-w-[300px] md:max-w-none md:w-[500px] md:h-80 object-contain z-0" />
+          <div className="flex-1 flex justify-center md:justify-end items-end">
+            <motion.img 
+              initial={{ x: 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              src={comunidade} 
+              className="w-full max-w-[600px] lg:max-w-[750px] drop-shadow-2xl hover:-translate-y-2 transition-transform duration-500 md:scale-125 lg:scale-150 origin-bottom md:translate-y-4" 
+              alt="Comunidade" 
+            />
+          </div>
         </div>
-
-      </section>
+      </motion.section>
 
 
       {/* SEÇÃO DE CADASTRO PREMIUM */}
-      <section className="max-w-6xl mx-auto mt-20 mb-20 px-6">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+        className="max-w-6xl mx-auto mt-20 mb-20 px-6"
+      >
         <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col lg:flex-row">
           
           {/* LADO ESQUERDO: COPY E BENEFÍCIOS */}
@@ -279,7 +380,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   )
 }

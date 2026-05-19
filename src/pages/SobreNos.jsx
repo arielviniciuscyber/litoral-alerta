@@ -230,10 +230,10 @@ export default function SobreNos() {
             <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2"></div>
 
             {[
-              { data: "2025", titulo: "A ideia nasceu", desc: "Um grupo de estudantes do litoral decidiu usar tecnologia para proteger a comunidade contra desastres naturais." },
-              { data: "2025", titulo: "Primeiro protótipo", desc: "Desenvolvemos a primeira versão do sistema de alertas e prevenção, focando na experiência do usuário." },
-              { data: "2026", titulo: "Lançamento oficial", desc: "O Litoral Alerta foi ao ar com monitoramento em tempo real, alertas e guias de prevenção completos." },
-              { data: "2026+", titulo: "O futuro", desc: "Expandir o sistema para todo o litoral brasileiro, integrar com órgãos oficiais e salvar ainda mais vidas." },
+              { data: "Março 2026", titulo: "A ideia nasceu", desc: "Um grupo de estudantes do litoral decidiu usar tecnologia para proteger a comunidade contra desastres naturais." },
+              { data: "Abril 2026", titulo: "Primeiro protótipo", desc: "Desenvolvemos a primeira versão do sistema de alertas e prevenção, focando na experiência do usuário." },
+              { data: "Maio 2026", titulo: "Lançamento oficial", desc: "O Litoral Alerta foi ao ar com monitoramento em tempo real, alertas e guias de prevenção completos." },
+              { data: "Futuro", titulo: "O futuro", desc: "Expandir o sistema para todo o litoral brasileiro, integrar com órgãos oficiais e salvar ainda mais vidas." },
             ].map((item, i) => (
               <div key={i} className={`flex items-center gap-6 md:gap-12 mb-12 relative ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}>
                 <div className={`flex-1 ${i % 2 === 0 ? "md:text-right" : "md:text-left"} pl-14 md:pl-0`}>
