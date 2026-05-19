@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { User, Lock, Mail, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import logo from "../assets/icone-logo.png";
 import BubbleBackground from "../components/BubbleBackground";
 
@@ -9,13 +10,12 @@ export default function Cadastro() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const [form, setForm] = useState({
-    username: "luan",
-    email: "luanmartins",
-    password: "1234",
-    confirmPassword: "1234",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   function handleChange(e) {
@@ -27,23 +27,21 @@ export default function Cadastro() {
 
   async function handleRegister(e) {
     e.preventDefault();
-    setError("");
 
-    // 🔴 Validações
     if (!form.username || !form.email || !form.password || !form.confirmPassword) {
-      return setError("Preencha todos os campos.");
+      return toast.error("Preencha todos os campos.");
     }
 
     if (!form.email.includes("@")) {
-      return setError("Email inválido.");
+      return toast.error("Email inválido.");
     }
 
     if (form.password.length < 4) {
-      return setError("A senha deve ter pelo menos 4 caracteres.");
+      return toast.error("A senha deve ter pelo menos 4 caracteres.");
     }
 
     if (form.password !== form.confirmPassword) {
-      return setError("As senhas não coincidem.");
+      return toast.error("As senhas não coincidem.");
     }
 
     try {
@@ -52,133 +50,157 @@ export default function Cadastro() {
       // 🔥 Simulação (depois vira API)
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      // ✅ sucesso
+      toast.success("Conta criada com sucesso!");
       navigate("/login");
 
     } catch (err) {
-      setError("Erro ao cadastrar.");
+      toast.error("Erro ao cadastrar.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="h-screen w-full flex items-center justify-center relative">
+    <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden">
       <BubbleBackground />
 
-      {/* 🔙 Voltar */}
+      {/* Botão Voltar */}
       <button
         onClick={() => navigate(-1)}
         className="absolute top-6 left-6 z-20 
-        bg-white/10 backdrop-blur-xl border border-white/30 
+        bg-white/10 backdrop-blur-xl border border-white/20 
         p-3 rounded-full shadow-lg 
-        hover:scale-105 hover:bg-white/20 transition"
+        hover:scale-105 hover:bg-white/20 transition-all group"
       >
-        <ArrowLeft className="text-white" size={20} />
+        <ArrowLeft className="text-white/70 group-hover:text-white transition-colors" size={20} />
       </button>
 
-      {/* Card */}
+      {/* Card de Cadastro */}
       <form
         onSubmit={handleRegister}
-        className="relative z-10 w-full max-w-[380px] mx-4 md:mx-0 p-8 rounded-2xl 
-        bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl"
+        className="relative z-10 w-full max-w-[420px] mx-4 md:mx-0 p-10 rounded-3xl 
+        bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl"
       >
 
-        {/* Logo */}
-        <div className="flex flex-col items-center mb-6">
-          <div className="w-16 h-16 flex items-center justify-center">
-            <img src={logo} className="max-w-full max-h-full" />
+        {/* Logo e Título */}
+        <div className="flex flex-col items-center mb-10">
+          <div className="w-16 h-16 bg-blue-600/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 border border-blue-500/20">
+            <img src={logo} className="w-10 h-10" alt="Logo" />
           </div>
-
-          <h1 className="text-white text-2xl font-semibold mt-2">
-            Cadastro
+          <h1 className="font-display text-white text-3xl font-extrabold tracking-tight">
+            Crie sua conta
           </h1>
+          <p className="text-slate-400 text-sm mt-2">Junte-se à rede de proteção civil</p>
         </div>
 
-        {/* Erro */}
-        {error && (
-          <div className="bg-red-500/20 text-red-200 text-sm p-3 rounded mb-4 text-center">
-            {error}
+        {/* Input Nome */}
+        <div className="mb-4">
+          <label className="text-xs font-semibold text-slate-400 mb-2 block ml-1 uppercase tracking-wider">Nome de Usuário</label>
+          <div className="flex items-center bg-white/8 hover:bg-white/12 rounded-xl px-4 py-3.5 border border-white/10 focus-within:border-blue-500/50 focus-within:bg-white/10 transition-all">
+            <User className="text-slate-500 mr-3 shrink-0" size={18} />
+            <input
+              type="text"
+              name="username"
+              value={form.username}
+              onChange={handleChange}
+              placeholder="Ex: joao_silva"
+              className="w-full bg-transparent outline-none text-white placeholder-slate-500 text-sm"
+            />
           </div>
-        )}
-
-        {/* Nome */}
-        <div className="flex items-center bg-white/30 rounded-full px-4 py-3 mb-4">
-          <User className="text-white mr-2" size={18} />
-          <input
-            type="text"
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            placeholder="Nome de usuário"
-            className="w-full bg-transparent outline-none text-white placeholder-white/70"
-          />
         </div>
 
-        {/* Email */}
-        <div className="flex items-center bg-white/30 rounded-full px-4 py-3 mb-4">
-          <Mail className="text-white mr-2" size={18} />
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Email"
-            className="w-full bg-transparent outline-none text-white placeholder-white/70"
-          />
+        {/* Input Email */}
+        <div className="mb-4">
+          <label className="text-xs font-semibold text-slate-400 mb-2 block ml-1 uppercase tracking-wider">Email</label>
+          <div className="flex items-center bg-white/8 hover:bg-white/12 rounded-xl px-4 py-3.5 border border-white/10 focus-within:border-blue-500/50 focus-within:bg-white/10 transition-all">
+            <Mail className="text-slate-500 mr-3 shrink-0" size={18} />
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="joao@email.com"
+              className="w-full bg-transparent outline-none text-white placeholder-slate-500 text-sm"
+            />
+          </div>
         </div>
 
-        {/* Senha */}
-        <div className="flex items-center bg-white/30 rounded-full px-4 py-3 mb-4">
-          <Lock className="text-white mr-2" size={18} />
-          <input
-            type={showPassword ? "text" : "password"}
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Senha"
-            className="w-full bg-transparent outline-none text-white placeholder-white/70"
-          />
-
-          <button type="button" onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? (
-              <EyeOff className="text-white" size={18} />
-            ) : (
-              <Eye className="text-white" size={18} />
-            )}
-          </button>
+        {/* Input Senha */}
+        <div className="mb-4">
+          <label className="text-xs font-semibold text-slate-400 mb-2 block ml-1 uppercase tracking-wider">Senha</label>
+          <div className="flex items-center bg-white/8 hover:bg-white/12 rounded-xl px-4 py-3.5 border border-white/10 focus-within:border-blue-500/50 focus-within:bg-white/10 transition-all">
+            <Lock className="text-slate-500 mr-3 shrink-0" size={18} />
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Mínimo 4 caracteres"
+              className="w-full bg-transparent outline-none text-white placeholder-slate-500 text-sm"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="text-slate-500 hover:text-white transition-colors ml-2 shrink-0"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
         </div>
 
-        {/* Confirmar senha */}
-        <div className="flex items-center bg-white/30 rounded-full px-4 py-3 mb-6">
-          <Lock className="text-white mr-2" size={18} />
-          <input
-            type="password"
-            name="confirmPassword"
-            value={form.confirmPassword}
-            onChange={handleChange}
-            placeholder="Confirmar senha"
-            className="w-full bg-transparent outline-none text-white placeholder-white/70"
-          />
+        {/* Confirmar Senha */}
+        <div className="mb-8">
+          <label className="text-xs font-semibold text-slate-400 mb-2 block ml-1 uppercase tracking-wider">Confirmar Senha</label>
+          <div className="flex items-center bg-white/8 hover:bg-white/12 rounded-xl px-4 py-3.5 border border-white/10 focus-within:border-blue-500/50 focus-within:bg-white/10 transition-all">
+            <Lock className="text-slate-500 mr-3 shrink-0" size={18} />
+            <input
+              type="password"
+              name="confirmPassword"
+              value={form.confirmPassword}
+              onChange={handleChange}
+              placeholder="Repita sua senha"
+              className="w-full bg-transparent outline-none text-white placeholder-slate-500 text-sm"
+            />
+          </div>
         </div>
 
-        {/* Botão */}
+        {/* Botão Cadastrar */}
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 rounded-full bg-white text-gray-800 font-semibold 
-          hover:scale-105 transition"
+          className="font-display w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-lg
+          shadow-lg shadow-blue-600/30 transition-all disabled:opacity-70 disabled:cursor-not-allowed
+          flex items-center justify-center gap-3"
         >
-          {loading ? "Cadastrando..." : "Cadastrar"}
+          {loading ? (
+            <>
+              <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Criando conta...
+            </>
+          ) : "Criar minha conta"}
         </button>
 
-        {/* Link login */}
-        <p
+        {/* Divisor */}
+        <div className="flex items-center gap-4 my-6">
+          <div className="flex-1 h-px bg-white/10"></div>
+          <span className="text-xs text-slate-500 uppercase tracking-wider">ou</span>
+          <div className="flex-1 h-px bg-white/10"></div>
+        </div>
+
+        {/* Link Login */}
+        <button
+          type="button"
           onClick={() => navigate("/login")}
-          className="text-center text-white/80 text-sm mt-4 cursor-pointer hover:underline"
+          className="font-display w-full py-4 rounded-xl 
+           bg-white/5 backdrop-blur-sm border border-white/15 
+            text-white font-semibold text-lg
+            hover:bg-white/10 transition-all"
         >
-          Já tem conta? Faça login
-        </p>
+          Já tenho uma conta
+        </button>
       </form>
     </div>
   );

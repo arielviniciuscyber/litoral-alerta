@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import Cadastro from './pages/Cadastro'
 import Error404 from "./pages/Error404";
 import Notificacoes from './pages/Notificacoes'
+import { Toaster } from 'react-hot-toast'
 
 export default function App() {
   const location = useLocation();
@@ -21,7 +22,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      
+      <Toaster position="bottom-right" toastOptions={{ duration: 4000, style: { background: '#1e293b', color: '#fff' } }} />
       {!hideLayout && <Header />}
 
       <main className="flex-1">

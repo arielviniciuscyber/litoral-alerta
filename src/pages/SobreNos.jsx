@@ -1,116 +1,275 @@
-import fundo from "../assets/fundo-sobrenos.png";
+import nuvensVideo from "../assets/nuvens.mp4";
 
 export default function SobreNos() {
+  const equipe = [
+    { nome: "Luan Martins", cargo: "UX/UI Designer", foto: "/src/assets/luan.png", desc: "Responsável por toda a experiência visual e interação do usuário na plataforma." },
+    { nome: "Ariel Teixeira", cargo: "Dev Frontend", foto: "/src/assets/ariel.png", desc: "Desenvolvedor da interface web, garantindo performance e responsividade." },
+    { nome: "Vanessa Gomes", cargo: "Dev Backend", foto: "/src/assets/perfil2.png", desc: "Arquiteta do servidor e banco de dados, mantendo a infraestrutura do sistema." },
+    { nome: "Marcelo", cargo: "Dev Mobile", foto: "/src/assets/perfil2.png", desc: "Criador do aplicativo móvel para alertas em tempo real no seu bolso." },
+  ];
+
   return (
-    <div>
-      <div
-        className="relative min-h-screen flex items-center justify-center"
-        style={{
-          backgroundImage: `url(${fundo})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative text-white max-w-3xl px-4 md:px-2 flex flex-col items-center md:items-start text-center md:text-left mt-10 md:mt-0">
-          <h1 className="text-4xl md:text-6xl font-bold mb-8 md:mb-14 text-center md:text-left tracking-wide drop-shadow-lg w-full">Sobre nós</h1>
-          <p className="text-lg md:text-2xl md:pl-6 text-blue-50 leading-relaxed">
+    <div className="bg-white">
+      {/* ═══════════════════════════════════════════════════════════
+          HERO SECTION — VÍDEO FULLSCREEN
+      ═══════════════════════════════════════════════════════════ */}
+      <div className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Vídeo de fundo */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src={nuvensVideo}
+        />
+
+        {/* Overlay cinematográfico em camadas */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/40 via-transparent to-blue-950/40"></div>
+
+        {/* Conteúdo do Hero */}
+        <div className="relative text-white max-w-4xl px-6 flex flex-col items-center text-center z-10">
+          <div className="font-display flex items-center gap-2 bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-full mb-8 border border-white/20">
+            <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
+            <span className="text-sm font-bold tracking-wider uppercase">Quem Somos</span>
+          </div>
+
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight tracking-tight drop-shadow-lg">
+            Tecnologia que
+            <span className="block text-blue-400 drop-shadow-lg">salva vidas</span>
+          </h1>
+
+          <p className="font-display mt-8 text-lg md:text-xl text-slate-200 max-w-2xl leading-relaxed font-medium drop-shadow-md">
             Somos uma equipe do litoral comprometida com a segurança e o
-            bem-estar da população. Diante dos riscos de enchentes, chuvas
-            intensas e deslizamentos, atuamos levando informação clara e
-            acessível para ajudar as pessoas a se prevenirem e reagirem melhor
-            em situações de emergência. Nosso objetivo é conscientizar a
-            comunidade por meio de orientações, alertas e conteúdos educativos,
-            fortalecendo a cultura de prevenção e o cuidado coletivo.
-            Acreditamos que a informação pode salvar vidas e contribuir para uma
-            comunidade mais segura e preparada.
+            bem-estar da população. Atuamos levando informação clara e
+            acessível para ajudar as pessoas a se prevenirem em situações de emergência.
           </p>
-          <button className="mt-8 md:mt-15 bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white font-bold py-3 px-8 rounded-lg shadow-lg shadow-blue-500/40 transition-all hover:-translate-y-1 mx-auto md:mx-0 md:ml-6">
-            Conhecer equipe
-          </button>
+
+          <div className="flex flex-col sm:flex-row gap-4 mt-10">
+            <a href="#equipe" className="font-display bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all text-lg">
+              Conhecer Equipe
+            </a>
+            <a href="#missao" className="font-display bg-white/10 backdrop-blur-sm border border-white/25 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/20 transition-all text-lg">
+              Nossa Missão
+            </a>
+          </div>
+        </div>
+
+        {/* Indicador de scroll */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/40 animate-bounce">
+          <span className="font-display text-xs uppercase tracking-widest font-semibold">Role para baixo</span>
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
         </div>
       </div>
 
-      <div className="bg-blue-400 text-blue-100 py-10 md:py-20 px-6 md:px-10">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center text-blue-900 tracking-wide">Nossa Missão</h1>
-        <h2 className="text-xl md:text-3xl text-center mb-10 md:mb-16 text-blue-900 italic">
-          informar e salvar vidas através da tecnologia
-        </h2>
-
-        <div className="flex flex-col md:flex-row gap-7 justify-center items-center">
-          <div className="bg-white rounded-xl p-8 md:p-15 text-center w-full max-w-[350px] shadow-xl shadow-blue-950/30 hover:-translate-y-2 transition-transform">
-            <div className="text-4xl mb-3">⚠️</div>
-            <h3 className="font-bold text-2xl mb-2 text-blue-900 ">
-              Alertas em tempo real
-            </h3>
-            <p className="text-blue-800 text-lg">Notificação rápida e precisa</p>
+      {/* ═══════════════════════════════════════════════════════════
+          NOSSA MISSÃO
+      ═══════════════════════════════════════════════════════════ */}
+      <section id="missao" className="py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="font-display text-sm font-bold text-blue-600 uppercase tracking-wider">🎯 Propósito</span>
+            <h2 className="font-display text-3xl md:text-5xl font-extrabold text-slate-900 mt-3">Nossa Missão</h2>
+            <p className="font-display mt-4 text-xl text-slate-500 italic max-w-xl mx-auto">
+              Informar e salvar vidas através da tecnologia
+            </p>
+            <div className="w-20 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
           </div>
 
-          <div className="bg-white rounded-xl p-8 md:p-15 text-center w-full max-w-[350px] shadow-xl shadow-blue-950/30 hover:-translate-y-2 transition-transform">
-            <div className="text-4xl mb-4">🛡️</div>
-            <h3 className="font-bold text-2xl mb-2 text-blue-900">
-              Dicas de prevenção
-            </h3>
-            <p className="text-blue-800 text-lg">Orientação para sua segurança</p>
-          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-gradient-to-b from-blue-50 to-white rounded-2xl p-8 border border-blue-100 text-center hover:shadow-xl hover:-translate-y-2 transition-all group">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 group-hover:bg-blue-600 group-hover:scale-110 transition-all">
+                <span className="group-hover:grayscale-0">⚠️</span>
+              </div>
+              <h3 className="font-display font-bold text-xl mb-3 text-slate-900">Alertas em tempo real</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Notificações rápidas e precisas sobre tempestades, enchentes e deslizamentos diretamente no seu dispositivo.
+              </p>
+            </div>
 
-          <div className="bg-white rounded-xl p-8 md:p-15 text-center w-full max-w-[350px] shadow-xl shadow-blue-950/30 hover:-translate-y-2 transition-transform">
-            <div className="text-4xl mb-4">❤️</div>
-            <h3 className="font-bold text-2xl mb-2 text-blue-900">
-              Apoio à comunidade
-            </h3>
-            <p className="text-blue-800 text-lg">Auxílio em momentos de crise</p>
-          </div>
-        </div>
-      </div>
+            <div className="bg-gradient-to-b from-emerald-50 to-white rounded-2xl p-8 border border-emerald-100 text-center hover:shadow-xl hover:-translate-y-2 transition-all group">
+              <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 group-hover:bg-emerald-600 group-hover:scale-110 transition-all">
+                <span className="group-hover:grayscale-0">🛡️</span>
+              </div>
+              <h3 className="font-display font-bold text-xl mb-3 text-slate-900">Dicas de prevenção</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Orientações práticas e comprovadas para garantir a segurança da sua família antes, durante e após emergências.
+              </p>
+            </div>
 
-      <div className="bg-slate-50">
-        <h1 className="text-bold text-center text-blue-900 text-4xl p-9 tracking-wide">
-          Nossa Equipe
-        </h1>
-        <h2 className="text-3xl text-center mb-16 text-slate-500 italic">
-          Conheça as pessoas por tras do nosso projeto
-        </h2>
-      </div>
-     
-      <div className="flex flex-col md:flex-row flex-wrap gap-10 md:gap-20 p-10 md:p-20 justify-center items-center bg-slate-50">
-        {/* Card Luan */}
-        <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-xl w-64 text-center shadow-xl hover:-translate-y-2 transition-transform border border-slate-700">
-          <img src="/src/assets/luan.png" alt="Foto de luan" className="rounded-t-xl" />
-          <div className="px-4 pt-4 pb-4">
-            <h3 className="font-bold text-2xl mb-2 text-white">Luan Martins</h3>
-            <p className="text-white text-lg italic">UX/UI Designer</p>
+            <div className="bg-gradient-to-b from-rose-50 to-white rounded-2xl p-8 border border-rose-100 text-center hover:shadow-xl hover:-translate-y-2 transition-all group">
+              <div className="w-16 h-16 bg-rose-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 group-hover:bg-rose-600 group-hover:scale-110 transition-all">
+                <span className="group-hover:grayscale-0">❤️</span>
+              </div>
+              <h3 className="font-display font-bold text-xl mb-3 text-slate-900">Apoio à comunidade</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Auxílio direto em momentos de crise, conectando pessoas a recursos e informações que fazem a diferença.
+              </p>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Card Ariel */}
-        <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-xl overflow-hidden w-64 text-center shadow-xl hover:-translate-y-2 transition-transform border border-slate-700">
-          <img src="/src/assets/ariel.png" alt="Foto de ariel" />
-          <div className="p-6">
-            <h3 className="font-bold text-2xl mb-2 text-white">Ariel Teixeira</h3>
-            <p className="text-white text-lg italic">Dev Frontend</p>
+      {/* ═══════════════════════════════════════════════════════════
+          NOSSOS VALORES (NOVO)
+      ═══════════════════════════════════════════════════════════ */}
+      <section className="bg-slate-900 text-white py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="font-display text-sm font-bold text-blue-400 uppercase tracking-wider">💡 Valores</span>
+            <h2 className="font-display text-3xl md:text-5xl font-extrabold mt-3">No que acreditamos</h2>
+            <div className="w-20 h-1 bg-blue-400 mx-auto mt-6 rounded-full"></div>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all text-center">
+              <div className="text-4xl mb-4">🤝</div>
+              <h3 className="font-display font-bold text-lg mb-2">Solidariedade</h3>
+              <p className="text-sm text-slate-400">Ninguém enfrenta uma crise sozinho. Comunidade é tudo.</p>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all text-center">
+              <div className="text-4xl mb-4">⚡</div>
+              <h3 className="font-display font-bold text-lg mb-2">Agilidade</h3>
+              <p className="text-sm text-slate-400">Cada segundo conta. Informação rápida pode salvar vidas.</p>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all text-center">
+              <div className="text-4xl mb-4">🔬</div>
+              <h3 className="font-display font-bold text-lg mb-2">Inovação</h3>
+              <p className="text-sm text-slate-400">Usamos tecnologia de ponta para monitorar e prevenir desastres.</p>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all text-center">
+              <div className="text-4xl mb-4">📚</div>
+              <h3 className="font-display font-bold text-lg mb-2">Educação</h3>
+              <p className="text-sm text-slate-400">Informação acessível é a base para uma comunidade preparada.</p>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Card 3 */}
-        <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-xl overflow-hidden w-64 text-center shadow-xl hover:-translate-y-2 transition-transform border border-slate-700">
-          <img src="/src/assets/perfil2.png" alt="Foto" />
-          <div className="p-6">
-            <h3 className="font-bold text-2xl mb-2 text-white">Vanessa Gomes</h3>
-            <p className="text-white text-lg italic">Dev Backend</p>
+      {/* ═══════════════════════════════════════════════════════════
+          IMPACTO EM NÚMEROS (NOVO)
+      ═══════════════════════════════════════════════════════════ */}
+      <section className="py-20 md:py-28 bg-gradient-to-r from-blue-600 to-blue-800">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold text-white">Nosso Impacto</h2>
+            <p className="text-blue-200 mt-3 text-lg">Os números que nos motivam a continuar</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <p className="font-display text-4xl md:text-5xl font-extrabold text-white">4</p>
+              <p className="text-blue-200 mt-2 font-semibold text-sm uppercase tracking-wider">Cidades monitoradas</p>
+            </div>
+            <div className="text-center">
+              <p className="font-display text-4xl md:text-5xl font-extrabold text-white">24/7</p>
+              <p className="text-blue-200 mt-2 font-semibold text-sm uppercase tracking-wider">Monitoramento</p>
+            </div>
+            <div className="text-center">
+              <p className="font-display text-4xl md:text-5xl font-extrabold text-white">500+</p>
+              <p className="text-blue-200 mt-2 font-semibold text-sm uppercase tracking-wider">Alertas enviados</p>
+            </div>
+            <div className="text-center">
+              <p className="font-display text-4xl md:text-5xl font-extrabold text-white">1k+</p>
+              <p className="text-blue-200 mt-2 font-semibold text-sm uppercase tracking-wider">Usuários cadastrados</p>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Card 4 */}
-        <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-xl overflow-hidden w-64 text-center shadow-xl hover:-translate-y-2 transition-transform border border-slate-700">
-          <img src="/src/assets/perfil2.png" alt="Foto" />
-          <div className="p-6">
-            <h3 className="font-bold text-2xl mb-2 text-white">Marcelo</h3>
-            <p className="text-white text-lg italic">Dev Mobile</p>
+      {/* ═══════════════════════════════════════════════════════════
+          EQUIPE
+      ═══════════════════════════════════════════════════════════ */}
+      <section id="equipe" className="py-20 md:py-28 bg-slate-50">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="font-display text-sm font-bold text-blue-600 uppercase tracking-wider">👥 Time</span>
+            <h2 className="font-display text-3xl md:text-5xl font-extrabold text-slate-900 mt-3">Nossa Equipe</h2>
+            <p className="mt-4 text-slate-500 text-lg max-w-xl mx-auto">
+              Conheça as pessoas por trás do nosso projeto
+            </p>
+            <div className="w-20 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {equipe.map((membro, i) => (
+              <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all group">
+                <div className="h-64 overflow-hidden">
+                  <img 
+                    src={membro.foto} 
+                    alt={`Foto de ${membro.nome}`} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                  />
+                </div>
+                <div className="p-6 text-center">
+                  <h3 className="font-display font-bold text-xl text-slate-900">{membro.nome}</h3>
+                  <p className="font-display text-blue-600 font-semibold text-sm mt-1 uppercase tracking-wider">{membro.cargo}</p>
+                  <p className="text-slate-500 text-sm mt-3 leading-relaxed">{membro.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
 
-      </div>
+      {/* ═══════════════════════════════════════════════════════════
+          LINHA DO TEMPO (NOVO)
+      ═══════════════════════════════════════════════════════════ */}
+      <section className="py-20 md:py-28">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="font-display text-sm font-bold text-blue-600 uppercase tracking-wider">📅 Jornada</span>
+            <h2 className="font-display text-3xl md:text-5xl font-extrabold text-slate-900 mt-3">Nossa Trajetória</h2>
+            <div className="w-20 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+          </div>
+
+          <div className="space-y-0 relative">
+            {/* Linha vertical central */}
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2"></div>
+
+            {[
+              { data: "2025", titulo: "A ideia nasceu", desc: "Um grupo de estudantes do litoral decidiu usar tecnologia para proteger a comunidade contra desastres naturais." },
+              { data: "2025", titulo: "Primeiro protótipo", desc: "Desenvolvemos a primeira versão do sistema de alertas e prevenção, focando na experiência do usuário." },
+              { data: "2026", titulo: "Lançamento oficial", desc: "O Litoral Alerta foi ao ar com monitoramento em tempo real, alertas e guias de prevenção completos." },
+              { data: "2026+", titulo: "O futuro", desc: "Expandir o sistema para todo o litoral brasileiro, integrar com órgãos oficiais e salvar ainda mais vidas." },
+            ].map((item, i) => (
+              <div key={i} className={`flex items-center gap-6 md:gap-12 mb-12 relative ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}>
+                <div className={`flex-1 ${i % 2 === 0 ? "md:text-right" : "md:text-left"} pl-14 md:pl-0`}>
+                  <span className="font-display text-sm font-bold text-blue-600 uppercase tracking-wider">{item.data}</span>
+                  <h3 className="font-display text-xl font-bold text-slate-900 mt-1">{item.titulo}</h3>
+                  <p className="text-slate-600 mt-2 leading-relaxed">{item.desc}</p>
+                </div>
+                <div className="absolute left-6 md:left-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow -translate-x-1/2 z-10"></div>
+                <div className="flex-1 hidden md:block"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          CTA FINAL
+      ═══════════════════════════════════════════════════════════ */}
+      <section className="bg-slate-900 py-20">
+        <div className="max-w-4xl mx-auto px-6 text-center text-white">
+          <h2 className="font-display text-3xl md:text-5xl font-extrabold mb-6">
+            Faça parte dessa missão
+          </h2>
+          <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            Cadastre-se na plataforma, compartilhe com seus vizinhos e ajude a construir uma rede de proteção para todo o litoral.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/" className="font-display bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all text-lg">
+              Cadastrar-se Agora
+            </a>
+            <a href="/prevencao" className="font-display bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/20 transition-all text-lg">
+              Ver Guia de Prevenção
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
