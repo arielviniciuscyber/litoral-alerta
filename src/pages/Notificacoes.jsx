@@ -106,7 +106,6 @@ export default function Notificacoes() {
               </svg>
             </button>
             <div>
-              <span className="font-display text-sm font-bold text-blue-600 uppercase tracking-wider">🔔 Central</span>
               <h1 className="font-display text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
                 Notificações
               </h1>

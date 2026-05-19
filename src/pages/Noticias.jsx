@@ -67,7 +67,7 @@ export default function NewsPage() {
         <div className="max-w-6xl mx-auto px-6 pt-28 pb-10">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
-              <span className="font-display text-sm font-bold text-blue-600 uppercase tracking-wider">📰 Portal de Notícias</span>
+              <span className="font-display text-sm font-bold text-blue-600 uppercase tracking-wider"> Portal de Notícias</span>
               <h1 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 mt-2 tracking-tight">
                 Últimas Notícias
               </h1>

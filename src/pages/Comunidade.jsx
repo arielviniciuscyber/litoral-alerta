@@ -221,7 +221,6 @@ export default function CommunityPage() {
       ═══════════════════════════════════════════════════════════ */}
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-2xl mx-auto px-6 pt-28 pb-8">
-          <span className="font-display text-sm font-bold text-blue-600 uppercase tracking-wider">💬 Fórum</span>
           <h1 className="font-display text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight">
             Comunidade
           </h1>
