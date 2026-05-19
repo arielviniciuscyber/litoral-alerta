@@ -1,4 +1,7 @@
 import { useState } from "react";
+import buraco from "../assets/buraco.png";
+import alagamento from "../assets/alagamento.png";
+import ventania from "../assets/ventania.png";
 
 const postsIniciais = [
   {
@@ -7,7 +10,7 @@ const postsIniciais = [
     avatarImg: "https://i.pravatar.cc/150?img=12",
     time: "2h atrás",
     text: "@prefeitura iae quando vcs vão vir cobrir esse buraco? na chuva de ontem vi dois ciclistas se acidentando por conta do buraco escondido de tanta água...",
-    image: "https://images.unsplash.com/photo-1515162305285-0293e4f4b8a3?w=600&q=80",
+    image: buraco,
     likes: 41,
     comments: 12,
     shares: 3,
@@ -25,7 +28,7 @@ const postsIniciais = [
     avatarImg: "https://i.pravatar.cc/150?img=33",
     time: "5h atrás",
     text: "Como se encontrava as casas do rio do ouro a alguns anos atrás. Fico feliz que nunca mais tenha alagado dessa forma.",
-    image: "https://images.unsplash.com/photo-1547683905-f686c993aae5?w=600&q=80",
+    image: alagamento,
     likes: 58,
     comments: 7,
     shares: 14,
@@ -43,7 +46,7 @@ const postsIniciais = [
     avatarImg: "https://i.pravatar.cc/150?img=52",
     time: "8h atrás",
     text: "Vento e chuvas fortes ontem, achei até que o vento iria levar minha casa junto.",
-    image: "https://images.unsplash.com/photo-1527482937786-6608f6e14c15?w=600&q=80",
+    image: ventania,
     likes: 29,
     comments: 5,
     shares: 2,
