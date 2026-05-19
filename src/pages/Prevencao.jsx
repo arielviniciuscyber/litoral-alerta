@@ -1,4 +1,4 @@
-import banner from "../assets/bannerprevencao.png";
+import ambulanciaVideo from "../assets/ambulancia.mp4";
 
 export default function Prevencao() {
   return (
@@ -6,16 +6,20 @@ export default function Prevencao() {
       {/* ═══════════════════════════════════════════════════════════
           HERO SECTION
       ═══════════════════════════════════════════════════════════ */}
-      <div
-        className="relative min-h-[85vh] flex items-center justify-center"
-        style={{
-          backgroundImage: `url(${banner})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-        }}
-      >
+      <div className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Vídeo de fundo */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src={ambulanciaVideo}
+        />
+
+        {/* Overlay cinematográfico em camadas */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/20 via-transparent to-blue-950/20"></div>
 
         <div className="relative text-white max-w-4xl px-6 flex flex-col items-center text-center z-10">
           {/* Badge */}

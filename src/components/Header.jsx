@@ -6,7 +6,7 @@ import perfil from '../assets/perfil.png'
 
 // Animação de linha inferior sofisticada para os links Desktop
 function linkClass({ isActive }) {
-  return `relative text-sm font-semibold tracking-wide transition-colors ${
+  return `relative text-sm font-medium tracking-wide uppercase transition-colors ${
     isActive ? "text-blue-400" : "text-slate-300 hover:text-white"
   } after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[2px] after:bg-blue-400 after:transition-transform after:duration-300 ${
     isActive ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100"
@@ -14,7 +14,7 @@ function linkClass({ isActive }) {
 }
 
 function linkClassMobile({ isActive }) {
-  return `block px-4 py-3 rounded-xl transition-all font-semibold ${
+  return `block px-4 py-3 rounded-xl transition-all uppercase font-medium text-sm ${
     isActive 
       ? "bg-blue-600/20 text-blue-400 border border-blue-500/30" 
       : "text-slate-300 hover:bg-slate-800 hover:text-white"
@@ -144,11 +144,11 @@ function Header() {
 
           {/* LINKS MOBILE */}
           <div className="flex flex-col gap-2">
-            <NavLink to="/" className={linkClassMobile} onClick={() => setMenuAberto(false)}>Home</NavLink>
-            <NavLink to="/noticias" className={linkClassMobile} onClick={() => setMenuAberto(false)}>Notícias</NavLink>
-            <NavLink to="/sobrenos" className={linkClassMobile} onClick={() => setMenuAberto(false)}>Sobre Nós</NavLink>
-            <NavLink to="/prevencao" className={linkClassMobile} onClick={() => setMenuAberto(false)}>Prevenção</NavLink>
-            <NavLink to="/comunidade" className={linkClassMobile} onClick={() => setMenuAberto(false)}>Comunidade</NavLink>
+            <NavLink to="/" className={linkClassMobile} onClick={() => setMenuAberto(false)}>HOME</NavLink>
+            <NavLink to="/noticias" className={linkClassMobile} onClick={() => setMenuAberto(false)}>NOTÍCIAS</NavLink>
+            <NavLink to="/sobrenos" className={linkClassMobile} onClick={() => setMenuAberto(false)}>SOBRE NÓS</NavLink>
+            <NavLink to="/prevencao" className={linkClassMobile} onClick={() => setMenuAberto(false)}>PREVENÇÃO</NavLink>
+            <NavLink to="/comunidade" className={linkClassMobile} onClick={() => setMenuAberto(false)}>COMUNIDADE</NavLink>
           </div>
         </div>
       </header>
