@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import logo from "../assets/icone-logo.png";
 import BubbleBackground from "../components/BubbleBackground";
 
+const API_BASE = "http://localhost:3000";
+
 export default function Cadastro() {
   const navigate = useNavigate();
 
@@ -47,8 +49,15 @@ export default function Cadastro() {
     try {
       setLoading(true);
 
-      // 🔥 Simulação (depois vira API)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const res = await fetch(`${API_BASE}/auth/cadastrar`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: form.username,
+          email: form.email,
+          senha: form.password,   // backend espera "senha", não "password"
+        }),
+      });
 
       toast.success("Conta criada com sucesso!");
       navigate("/login");
