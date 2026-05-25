@@ -3,6 +3,7 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import Home from "./pages/Home"
 import Noticias from "./pages/Noticias"
+import NoticiaDetalhe from "./pages/NoticiaDetalhe"
 import Prevencao from "./pages/Prevencao"
 import Comunidade from "./pages/Comunidade"
 import SobreNos from './pages/SobreNos'
@@ -29,6 +30,7 @@ export default function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="/noticias" element={<Noticias />} />
+          <Route path="/noticias/:slug" element={<NoticiaDetalhe />} />
           <Route path="/sobrenos" element={<SobreNos />} />
           <Route path="/prevencao" element={<Prevencao />} />
           <Route path="/comunidade" element={<Comunidade />} />
