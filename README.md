@@ -1,16 +1,64 @@
-# React + Vite
+# Litoral Alerta
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema web informativo e educacional desenvolvido com React, Vite e TailwindCSS para conscientização, prevenção e orientação sobre enchentes, alagamentos e riscos climáticos.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tecnologias Utilizadas
 
-## React Compiler
+* ⚛️ React
+* ⚡ Vite
+* 💨 TailwindCSS
+* 🟨 JavaScript
+* 🎨 CSS3
+* 📦 ESLint
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Sobre o Projeto
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+O **Litoral Alerta** foi criado com o objetivo de fornecer informações educativas e preventivas sobre:
+
+* Enchentes e alagamentos
+* Áreas de risco
+* Segurança em situações de emergência
+* Educação ambiental
+* Medidas preventivas
+
+---
+
+
+## Como Executar o Projeto
+
+Clone o repositório:
+
+```bash id="6hynro"
+git clone https://github.com/arielviniciuscyber/litoral-alerta.git
+```
+
+Acesse a pasta do projeto:
+
+```bash id="htrwop"
+cd litoral-alerta
+```
+
+Instale as dependências:
+
+```bash id="vex4oa"
+npm install
+```
+
+Execute o servidor de desenvolvimento:
+
+```bash id="w8i8wy"
+npm run dev
+```
+
+<!-- esse é comentario so pra teste -->
+
+## Autor
+
+Desenvolvido por Ariel Vinicius, Luan Martins, Vanessa Gomes y Marcello 
+
+GitHub:
+https://github.com/arielviniciuscyber
