@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import logo from "../assets/icone-logo.png";
 import BubbleBackground from "../components/BubbleBackground";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -17,10 +19,7 @@ export default function Login() {
   });
 
   function handleChange(e) {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
   }
 
   async function handleLogin(e) {
@@ -29,7 +28,6 @@ export default function Login() {
     if (!form.username || !form.password) {
       return toast.error("Preencha todos os campos.");
     }
-
     if (form.password.length < 4) {
       return toast.error("A senha deve ter pelo menos 4 caracteres.");
     }
@@ -37,15 +35,26 @@ export default function Login() {
     try {
       setLoading(true);
 
-      // 🔥 SIMULAÇÃO (trocar por API depois)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          username: form.username,
+          senha: form.password,
+        }),
+      });
 
-      if (form.username !== "admin" || form.password !== "1234") {
-        throw new Error("Usuário ou senha inválidos.");
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.message || "Usuário ou senha inválidos.");
       }
 
+      const userData = await response.json();
+      login(userData); // salva no contexto global
+
       toast.success("Login realizado com sucesso!");
-      navigate("/home");
+      navigate("/");
 
     } catch (err) {
       toast.error(err.message);
@@ -58,7 +67,6 @@ export default function Login() {
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden">
       <BubbleBackground />
 
-      {/* Botão Voltar */}
       <button
         onClick={() => navigate(-1)}
         className="absolute top-6 left-6 z-20 
@@ -69,14 +77,11 @@ export default function Login() {
         <ArrowLeft className="text-white/70 group-hover:text-white transition-colors" size={20} />
       </button>
 
-      {/* Card de Login */}
       <form
         onSubmit={handleLogin}
         className="relative z-10 w-full max-w-[420px] mx-4 md:mx-0 p-10 rounded-3xl 
         bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl"
       >
-
-        {/* Logo e Título */}
         <div className="flex flex-col items-center mb-10">
           <div className="w-16 h-16 bg-blue-600/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 border border-blue-500/20">
             <img src={logo} className="w-10 h-10" alt="Logo" />
@@ -87,7 +92,6 @@ export default function Login() {
           <p className="text-slate-400 text-sm mt-2">Entre na sua conta para continuar</p>
         </div>
 
-        {/* Input Usuário */}
         <div className="mb-4">
           <label className="text-xs font-semibold text-slate-400 mb-2 block ml-1 uppercase tracking-wider">Usuário</label>
           <div className="flex items-center bg-white/8 hover:bg-white/12 rounded-xl px-4 py-3.5 border border-white/10 focus-within:border-blue-500/50 focus-within:bg-white/10 transition-all">
@@ -103,7 +107,6 @@ export default function Login() {
           </div>
         </div>
 
-        {/* Input Senha */}
         <div className="mb-6">
           <label className="text-xs font-semibold text-slate-400 mb-2 block ml-1 uppercase tracking-wider">Senha</label>
           <div className="flex items-center bg-white/8 hover:bg-white/12 rounded-xl px-4 py-3.5 border border-white/10 focus-within:border-blue-500/50 focus-within:bg-white/10 transition-all">
@@ -126,10 +129,9 @@ export default function Login() {
           </div>
         </div>
 
-        {/* Lembrar e Esqueceu */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-2">
-            <input type="checkbox" className="rounded border-slate-600 accent-blue-500" id="lembrar" />          
+            <input type="checkbox" className="rounded border-slate-600 accent-blue-500" id="lembrar" />
             <label htmlFor="lembrar" className="text-slate-400 text-sm cursor-pointer">Lembrar-me</label>
           </div>
           <button type="button" className="text-blue-400 text-sm font-semibold hover:text-blue-300 transition-colors">
@@ -137,7 +139,6 @@ export default function Login() {
           </button>
         </div>
 
-        {/* Botão Login */}
         <button
           type="submit"
           disabled={loading}
@@ -156,14 +157,12 @@ export default function Login() {
           ) : "Entrar"}
         </button>
 
-        {/* Divisor */}
         <div className="flex items-center gap-4 my-6">
           <div className="flex-1 h-px bg-white/10"></div>
           <span className="text-xs text-slate-500 uppercase tracking-wider">ou</span>
           <div className="flex-1 h-px bg-white/10"></div>
         </div>
 
-        {/* Botão Cadastro */}
         <button
           type="button"
           onClick={() => navigate("/cadastro")}

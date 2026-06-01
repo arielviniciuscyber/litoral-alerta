@@ -21,7 +21,7 @@ export default function Home() {
     setCarregando(true)
 
     try {
-      const res = await fetch("http://localhost:3000/usuarios", {
+      const res = await fetch("http://localhost:3000/auth/cadastrar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -47,12 +47,12 @@ export default function Home() {
     <div>
       {/* HERO */}
       <section className="h-screen relative overflow-hidden">
-        <video 
-          src={bannerVideo} 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
+        <video
+          src={bannerVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
           className="absolute inset-0 w-full h-full object-cover"
         />
         {/* Overlay com gradiente cinematográfico */}
@@ -60,7 +60,7 @@ export default function Home() {
 
         {/* Conteúdo Central */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10 px-6 text-center">
-          
+
           {/* Badge de Alerta */}
           <div className="font-display flex items-center gap-2 bg-red-600/90 backdrop-blur-sm px-5 py-2 rounded-full mb-8 animate-pulse">
             <span className="w-2.5 h-2.5 bg-white rounded-full"></span>
@@ -80,14 +80,14 @@ export default function Home() {
 
           {/* Botões de Ação */}
           <div className="flex flex-col sm:flex-row gap-4 mt-10">
-            <button 
+            <button
               onClick={() => toast("Ação de emergência ativada!", { icon: "🚨" })}
               className="font-display bg-red-600 hover:bg-red-500 text-white font-bold px-8 py-4 rounded-xl shadow-[0_0_30px_rgba(220,38,38,0.5)] hover:shadow-[0_0_40px_rgba(220,38,38,0.7)] transition-all flex items-center justify-center gap-3 text-lg"
             >
               <span className="w-3 h-3 bg-white rounded-full animate-ping"></span>
               Acionar SOS
             </button>
-            <a 
+            <a
               href="/prevencao"
               className="font-display bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold px-8 py-4 rounded-xl border border-white/20 transition-all text-lg text-center"
             >
@@ -122,7 +122,7 @@ export default function Home() {
       </section>
 
       {/* RESUMO DA SEMANA (DESIGN BENTO GRID PREMIUM) */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -134,8 +134,9 @@ export default function Home() {
             <span className="font-display inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 font-bold text-xs uppercase tracking-widest mb-4 border border-blue-100">Panorama Geral</span>
             <h2 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Resumo da Semana</h2>
           </div>
-          <button className="hidden md:flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors group">
-            Ver todas as notícias 
+          <button className="hidden md:flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors group 
+          ">
+            Ver todas as notícias
             <span className="bg-blue-100 p-2 rounded-full group-hover:translate-x-1 transition-transform">→</span>
           </button>
         </div>
@@ -175,21 +176,21 @@ export default function Home() {
           {/* Card Horizontal (Span 2) */}
           <motion.div whileHover={{ y: -5 }} className="md:col-span-2 bg-gradient-to-r from-slate-50 to-white rounded-3xl p-8 relative overflow-hidden group cursor-pointer border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.06)] transition-all duration-500">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-               <div className="flex-1">
-                 <span className="inline-block px-4 py-1.5 bg-slate-200/70 text-slate-700 rounded-full text-xs font-bold tracking-widest uppercase mb-4">Trânsito & Vias</span>
-                 <h3 className="font-display font-bold text-slate-800 text-2xl md:text-3xl mb-3">Queda de árvores nas rodovias</h3>
-                 <p className="text-slate-500 text-lg max-w-xl">Múltiplas quedas registradas na Rodovia Rio-Santos devido aos ventos de 80km/h. Trânsito operando no sistema pare-e-siga.</p>
-               </div>
-               <div className="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center text-4xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 border border-slate-50 shrink-0">
-                 🌲
-               </div>
+              <div className="flex-1">
+                <span className="inline-block px-4 py-1.5 bg-slate-200/70 text-slate-700 rounded-full text-xs font-bold tracking-widest uppercase mb-4">Trânsito & Vias</span>
+                <h3 className="font-display font-bold text-slate-800 text-2xl md:text-3xl mb-3">Queda de árvores nas rodovias</h3>
+                <p className="text-slate-500 text-lg max-w-xl">Múltiplas quedas registradas na Rodovia Rio-Santos devido aos ventos de 80km/h. Trânsito operando no sistema pare-e-siga.</p>
+              </div>
+              <div className="w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center text-4xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 border border-slate-50 shrink-0">
+                🌲
+              </div>
             </div>
           </motion.div>
         </div>
       </motion.section>
 
       {/* INFORMAÇÕES VITAIS (CARDS EXPANSIVOS SOFISTICADOS) */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -208,14 +209,14 @@ export default function Home() {
             { title: "Sistema de Alertas", desc: "Entenda a diferença entre Alerta Amarelo, Laranja e Vermelho. Saiba como receber notificações prioritárias diretamente via SMS ou Push.", color: "from-blue-700 via-indigo-900 to-slate-900", icon: "🚨" },
             { title: "Rotas Seguras", desc: "Mapeamento em tempo real de áreas de alto risco, ruas com histórico de alagamento e rotas de evacuação em direção aos abrigos municipais.", color: "from-amber-700 via-orange-900 to-slate-900", icon: "🗺️" },
           ].map((card, i) => (
-            <motion.div 
-              key={i} 
-              whileHover={{ y: -10 }} 
+            <motion.div
+              key={i}
+              whileHover={{ y: -10 }}
               className={`relative h-[380px] lg:h-[420px] rounded-[2rem] overflow-hidden group cursor-pointer shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.2)] transition-all duration-700 bg-gradient-to-br ${card.color}`}
             >
               {/* Efeito de Brilho Dinâmico simulando vidro iluminado */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-white/10 transition-all duration-700 group-hover:scale-150"></div>
-              
+
               {/* Vignette escura na base para garantir leitura */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/10 to-transparent pointer-events-none"></div>
 
@@ -245,7 +246,7 @@ export default function Home() {
 
 
       {/* COMUNIDADE */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -260,10 +261,10 @@ export default function Home() {
             <p className="text-slate-600 text-lg md:text-xl mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed">
               Compartilhe informações em tempo real, receba atualizações dos seus vizinhos e construa uma rede de proteção civil junto conosco.
             </p>
-            <motion.a 
+            <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="/comunidade" 
+              href="/comunidade"
               className="inline-block font-display bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all text-lg"
             >
               Entrar na Comunidade
@@ -273,19 +274,19 @@ export default function Home() {
             <div className="relative w-full max-w-[500px] lg:max-w-[600px]">
               {/* Efeito de brilho sutil atrás da foto */}
               <div className="absolute inset-0 bg-blue-400 rounded-3xl blur-[40px] opacity-20 -z-10"></div>
-              
-              <motion.img 
+
+              <motion.img
                 initial={{ x: 50, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3, duration: 0.6 }}
-                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop" 
-                className="w-full h-[400px] lg:h-[450px] object-cover rounded-3xl shadow-2xl border border-white/50 hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(0,0,0,0.15)] transition-all duration-500" 
-                alt="Comunidade Unida" 
+                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop"
+                className="w-full h-[400px] lg:h-[450px] object-cover rounded-3xl shadow-2xl border border-white/50 hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(0,0,0,0.15)] transition-all duration-500"
+                alt="Comunidade Unida"
               />
-              
+
               {/* Badge Flutuante */}
-              <motion.div 
+              <motion.div
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
@@ -309,7 +310,7 @@ export default function Home() {
 
 
       {/* SEÇÃO DE CADASTRO PREMIUM */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -317,7 +318,7 @@ export default function Home() {
         className="max-w-6xl mx-auto mt-20 mb-20 px-6"
       >
         <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col lg:flex-row">
-          
+
           {/* LADO ESQUERDO: COPY E BENEFÍCIOS */}
           <div className="bg-slate-900 text-white p-10 lg:p-14 lg:w-5/12 flex flex-col justify-center relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full bg-blue-600/20 rounded-full translate-x-1/2 -translate-y-1/2 blur-[80px]"></div>
@@ -327,7 +328,7 @@ export default function Home() {
             <p className="text-slate-300 mb-8 relative z-10 text-lg">
               Cadastre-se na nossa rede de proteção civil e receba informações vitais antes que a emergência aconteça.
             </p>
-            
+
             <ul className="space-y-5 relative z-10">
               <li className="flex items-center gap-4">
                 <div className="bg-blue-500/20 p-2 rounded-full text-blue-400 text-sm">✅</div>
@@ -347,7 +348,7 @@ export default function Home() {
           {/* LADO DIREITO: FORMULÁRIO */}
           <div className="p-10 lg:p-14 lg:w-7/12 flex flex-col justify-center bg-slate-50">
             <h3 className="text-2xl font-bold text-slate-800 mb-8">Criar seu alerta pessoal</h3>
-            
+
             <div className="flex flex-col gap-5">
               <div className="flex flex-col gap-1.5">
                 <label className="text-sm font-semibold text-slate-600 ml-1">Nome Completo</label>
