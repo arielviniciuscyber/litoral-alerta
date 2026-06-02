@@ -1,11 +1,15 @@
 import nuvensVideo from "../assets/nuvens.mp4";
+import luan from "../assets/luan.png"
+import ariel from "../assets/ariel.png"
+import perfil2 from "../assets/perfil2.png"
+import { Link } from "react-router-dom"
 
 export default function SobreNos() {
   const equipe = [
-    { nome: "Luan Martins", cargo: "UX/UI Designer", foto: "/src/assets/luan.png", desc: "Responsável por toda a experiência visual e interação do usuário na plataforma." },
-    { nome: "Ariel Teixeira", cargo: "Dev Frontend", foto: "/src/assets/ariel.png", desc: "Desenvolvedor da interface web, garantindo performance e responsividade." },
-    { nome: "Vanessa Gomes", cargo: "Dev Backend", foto: "/src/assets/perfil2.png", desc: "Arquiteta do servidor e banco de dados, mantendo a infraestrutura do sistema." },
-    { nome: "Marcelo", cargo: "Dev Mobile", foto: "/src/assets/perfil2.png", desc: "Criador do aplicativo móvel para alertas em tempo real no seu bolso." },
+    { nome: "Luan Martins", cargo: "UX/UI Designer", foto: luan, desc: "Responsável por toda a experiência visual e interação do usuário na plataforma." },
+    { nome: "Ariel Teixeira", cargo: "Dev Frontend", foto: ariel, desc: "Desenvolvedor da interface web, garantindo performance e responsividade." },
+    { nome: "Vanessa Gomes", cargo: "Dev Backend", foto: perfil2, desc: "Arquiteta do servidor e banco de dados, mantendo a infraestrutura do sistema." },
+    { nome: "Marcelo", cargo: "Dev Mobile", foto: perfil2, desc: "Criador do aplicativo móvel para alertas em tempo real no seu bolso." },
   ];
 
   return (
@@ -261,12 +265,13 @@ export default function SobreNos() {
             Cadastre-se na plataforma, compartilhe com seus vizinhos e ajude a construir uma rede de proteção para todo o litoral.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/" className="font-display bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all text-lg">
+            <Link to="/cadastro" className="font-display bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all text-lg">
               Cadastrar-se Agora
-            </a>
-            <a href="/prevencao" className="font-display bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/20 transition-all text-lg">
+            </Link>
+            <Link to="/prevencao"
+             className="font-display bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/20 transition-all text-lg">
               Ver Guia de Prevenção
-            </a>
+            </Link>
           </div>
         </div>
       </section>

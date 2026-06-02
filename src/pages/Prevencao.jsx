@@ -1,4 +1,5 @@
 import ambulanciaVideo from "../assets/ambulancia.mp4";
+import { Link } from "react-router-dom";
 
 export default function Prevencao() {
   return (
@@ -377,10 +378,10 @@ export default function Prevencao() {
             Juntos podemos construir uma comunidade mais preparada e resiliente.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/comunidade" className="font-display bg-white text-blue-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-blue-50 transition-all text-lg">
+            <Link to="/comunidade" className="font-display bg-white text-blue-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-blue-50 transition-all text-lg">
               Entrar na Comunidade
-            </a>
-            <a href="/" className="font-display bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/20 transition-all text-lg">
+            </Link>
+            <a href="#top" className="font-display bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/20 transition-all text-lg">
               Voltar ao Início
             </a>
           </div>

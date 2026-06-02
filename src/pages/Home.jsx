@@ -1,13 +1,8 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import toast from "react-hot-toast"
 import { motion } from "framer-motion"
 import bannerVideo from "../assets/tempestade.mp4"
-import prevencao from "../assets/cadastro.png"
-import comunidade from "../assets/comunidade.png"
-
-import hidrata from "../assets/use.png"
-import alerta from "../assets/monitore.png"
-import alagamento from "../assets/alagamento.png"
 
 export default function Home() {
   const [form, setForm] = useState({ username: "", email: "", senha: "" })
@@ -87,12 +82,12 @@ export default function Home() {
               <span className="w-3 h-3 bg-white rounded-full animate-ping"></span>
               Acionar SOS
             </button>
-            <a
-              href="/prevencao"
+            <Link
+              to="/prevencao"
               className="font-display bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold px-8 py-4 rounded-xl border border-white/20 transition-all text-lg text-center"
             >
               Dicas de Prevenção
-            </a>
+            </Link>
           </div>
 
           {/* Métricas Rápidas */}
@@ -134,11 +129,11 @@ export default function Home() {
             <span className="font-display inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 font-bold text-xs uppercase tracking-widest mb-4 border border-blue-100">Panorama Geral</span>
             <h2 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Resumo da Semana</h2>
           </div>
-          <button className="hidden md:flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors group 
+          <Link to="/noticias"className="hidden md:flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors group 
           ">
             Ver todas as notícias
             <span className="bg-blue-100 p-2 rounded-full group-hover:translate-x-1 transition-transform">→</span>
-          </button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -149,9 +144,9 @@ export default function Home() {
               <span className="inline-block px-4 py-1.5 bg-white/10 border border-white/20 text-white rounded-full text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-md">Alerta Urgente</span>
               <h3 className="font-display font-extrabold text-3xl lg:text-4xl text-white mb-4 max-w-lg leading-tight">Temporal histórico atinge o litoral norte de SP</h3>
               <p className="text-blue-100/80 text-lg max-w-lg leading-relaxed mb-8">Índices pluviométricos batem recorde e causam alagamentos extremos. Vias principais seguem interditadas na região metropolitana da baixada.</p>
-              <div className="inline-flex items-center gap-3 text-white font-bold bg-white/10 hover:bg-white/20 px-6 py-3 rounded-xl backdrop-blur-md transition-colors border border-white/10">
+              <Link to="/noticias" className="inline-flex items-center gap-3 text-white font-bold bg-white/10 hover:bg-white/20 px-6 py-3 rounded-xl backdrop-blur-md transition-colors border border-white/10">
                 Acompanhar Cobertura <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </div>
+              </Link>
             </div>
           </motion.div>
 
@@ -203,7 +198,7 @@ export default function Home() {
           <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto mt-6">Manuais interativos e diretrizes oficiais da Defesa Civil para você proteger sua família antes, durante e depois da tempestade.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <Link to="/prevencao" className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {[
             { title: "Guia de Prevenção", desc: "Aprenda a criar um kit de emergência, proteger documentos importantes e fortificar sua residência antes da chegada de ciclones e tempestades severas.", color: "from-emerald-700 via-teal-900 to-slate-900", icon: "🛡️" },
             { title: "Sistema de Alertas", desc: "Entenda a diferença entre Alerta Amarelo, Laranja e Vermelho. Saiba como receber notificações prioritárias diretamente via SMS ou Push.", color: "from-blue-700 via-indigo-900 to-slate-900", icon: "🚨" },
@@ -240,7 +235,7 @@ export default function Home() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </Link>
       </motion.section>
 
 
@@ -261,14 +256,14 @@ export default function Home() {
             <p className="text-slate-600 text-lg md:text-xl mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed">
               Compartilhe informações em tempo real, receba atualizações dos seus vizinhos e construa uma rede de proteção civil junto conosco.
             </p>
-            <motion.a
+            <Link
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="/comunidade"
+              to="/comunidade"
               className="inline-block font-display bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all text-lg"
             >
               Entrar na Comunidade
-            </motion.a>
+            </Link>
           </div>
           <div className="flex-1 flex justify-center md:justify-end">
             <div className="relative w-full max-w-[500px] lg:max-w-[600px]">
