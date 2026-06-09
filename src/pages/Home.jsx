@@ -256,14 +256,14 @@ export default function Home() {
             <p className="text-slate-600 text-lg md:text-xl mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed">
               Compartilhe informações em tempo real, receba atualizações dos seus vizinhos e construa uma rede de proteção civil junto conosco.
             </p>
-            <Link
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              to="/comunidade"
-              className="inline-block font-display bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all text-lg"
-            >
-              Entrar na Comunidade
-            </Link>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+  <Link
+    to="/comunidade"
+    className="inline-block font-display bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all text-lg"
+  >
+    Entrar na Comunidade
+  </Link>
+</motion.div>
           </div>
           <div className="flex-1 flex justify-center md:justify-end">
             <div className="relative w-full max-w-[500px] lg:max-w-[600px]">
