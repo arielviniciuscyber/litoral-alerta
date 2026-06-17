@@ -1,13 +1,6 @@
 import { useAuth } from "../context/AuthContext";
 
 export default function AdminButton({ children, onClick, className = "" }) {
-  const { user } = useAuth();
-
-  // Renderização condicional: se não existir usuário ou ele não for admin, não exibe nada.
-  if (!user || user.role !== "admin") {
-    return null;
-  }
-
   return (
     <button
       onClick={onClick}

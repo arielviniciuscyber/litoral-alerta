@@ -12,6 +12,14 @@ export default function NewsPage() {
   const [noticias, setNoticias] = useState([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState(null);
+  const [mostrarModal, setMostrarModal] = useState(false);
+
+  const [novaNoticia, setNovaNoticia] = useState({
+    slug: "",
+    resumo: "",
+    conteudo: "",
+    fotoCapa: "",
+  });
 
   useEffect(() => {
     async function fetchNoticias() {
@@ -54,6 +62,40 @@ export default function NewsPage() {
     setSearch(e.target.value);
     setCurrentPage(1);
   }
+  async function criarNoticia(e) {
+  e.preventDefault();
+
+  try {
+    const res = await fetch(`${API_BASE}/noticias`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(novaNoticia),
+    });
+
+    if (!res.ok) {
+      throw new Error("Erro ao criar notícia");
+    }
+
+    const noticiaCriada = await res.json();
+
+    setNoticias(prev => [noticiaCriada, ...prev]);
+
+    setNovaNoticia({
+      slug: "",
+      resumo: "",
+      conteudo: "",
+      fotoCapa: "",
+    });
+
+    setMostrarModal(false);
+
+    alert("Notícia criada com sucesso!");
+  } catch (err) {
+    alert(err.message);
+  }
+}
 
   const destaque = noticiasFiltradas[0];
   const restantes = noticiasPaginadas.filter(n => n.id !== destaque?.id);
@@ -74,7 +116,7 @@ export default function NewsPage() {
                 Fique por dentro de tudo que acontece no litoral. Clima, alertas e comunidade.
               </p>
             </div>
-            <AdminButton onClick={() => alert("Abrir modal de nova publicação...")}>
+            <AdminButton onClick={() => setMostrarModal(true)}>
               + Nova publicação
             </AdminButton>
           </div>
@@ -99,17 +141,15 @@ export default function NewsPage() {
           <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl">
             <button
               onClick={() => handleTabChange("recentes")}
-              className={`font-display px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-                activeTab === "recentes" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"
-              }`}
+              className={`font-display px-4 py-2 rounded-lg text-sm font-semibold transition-all ${activeTab === "recentes" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
             >
               Recentes
             </button>
             <button
               onClick={() => handleTabChange("popular")}
-              className={`font-display px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-1 ${
-                activeTab === "popular" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"
-              }`}
+              className={`font-display px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-1 ${activeTab === "popular" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
             >
               Popular 🔥
             </button>
@@ -259,11 +299,10 @@ export default function NewsPage() {
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
-                className={`w-10 h-10 rounded-xl text-sm font-bold transition-all ${
-                  currentPage === page
-                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
-                    : "bg-white text-slate-500 border border-slate-200 hover:bg-slate-50"
-                }`}
+                className={`w-10 h-10 rounded-xl text-sm font-bold transition-all ${currentPage === page
+                  ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
+                  : "bg-white text-slate-500 border border-slate-200 hover:bg-slate-50"
+                  }`}
               >
                 {page}
               </button>
@@ -280,7 +319,87 @@ export default function NewsPage() {
             </button>
           </div>
         )}
-      </div>
-    </div>
+        {mostrarModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-2xl w-full max-w-xl">
+              <h2 className="text-xl font-bold mb-4">
+                Nova notícia
+              </h2>
+
+              <form onSubmit={criarNoticia} className="space-y-3">
+
+                <input
+                  className="w-full border p-2 rounded"
+                  placeholder="Slug"
+                  value={novaNoticia.slug}
+                  onChange={(e) =>
+                    setNovaNoticia({
+                      ...novaNoticia,
+                      slug: e.target.value,
+                    })
+                  }
+                />
+
+                <input
+                  className="w-full border p-2 rounded"
+                  placeholder="Foto de capa"
+                  value={novaNoticia.fotoCapa}
+                  onChange={(e) =>
+                    setNovaNoticia({
+                      ...novaNoticia,
+                      fotoCapa: e.target.value,
+                    })
+                  }
+                />
+
+                <textarea
+                  className="w-full border p-2 rounded"
+                  rows={3}
+                  placeholder="Resumo"
+                  value={novaNoticia.resumo}
+                  onChange={(e) =>
+                    setNovaNoticia({
+                      ...novaNoticia,
+                      resumo: e.target.value,
+                    })
+                  }
+                />
+
+                <textarea
+                  className="w-full border p-2 rounded"
+                  rows={8}
+                  placeholder="Conteúdo"
+                  value={novaNoticia.conteudo}
+                  onChange={(e) =>
+                    setNovaNoticia({
+                      ...novaNoticia,
+                      conteudo: e.target.value,
+                    })
+                  }
+                />
+
+                <div className="flex gap-2 justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setMostrarModal(false)}
+                    className="px-4 py-2 border rounded"
+                  >
+                    Cancelar
+                  </button>
+
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-blue-600 text-white rounded"
+                  >
+                    Publicar
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        )}
+      </div >
+    </div >
   );
 }
