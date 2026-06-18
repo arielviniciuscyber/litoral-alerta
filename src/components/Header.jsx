@@ -5,6 +5,8 @@ import notificações from '../assets/notificações.png'
 import perfil from '../assets/perfil.png'
 import { useAuth } from '../context/AuthContext'
 
+const API_BASE = ""
+
 function linkClass({ isActive }) {
   return `relative text-sm font-medium tracking-wide uppercase transition-colors ${
     isActive ? "text-blue-400" : "text-slate-300 hover:text-white"
@@ -21,19 +23,10 @@ function linkClassMobile({ isActive }) {
   }`
 }
 
-// Gera uma cor de fundo determinística baseada no username
 function avatarColor(username = "") {
   const colors = [
-    "#2563eb", // blue-600
-    "#7c3aed", // violet-600
-    "#db2777", // pink-600
-    "#059669", // emerald-600
-    "#d97706", // amber-600
-    "#dc2626", // red-600
-    "#0891b2", // cyan-600
-    "#65a30d", // lime-600
-    "#9333ea", // purple-600
-    "#0284c7", // sky-600
+    "#2563eb", "#7c3aed", "#db2777", "#059669", "#d97706",
+    "#dc2626", "#0891b2", "#65a30d", "#9333ea", "#0284c7",
   ]
   let hash = 0
   for (let i = 0; i < username.length; i++) {
@@ -46,6 +39,20 @@ function UserAvatar({ user, size = "sm" }) {
   const inicial = (user.nome || user.username).charAt(0).toUpperCase()
   const bg = avatarColor(user.username)
   const dim = size === "sm" ? "w-8 h-8 text-sm" : "w-12 h-12 text-lg"
+
+  // Se tiver foto de perfil, mostra ela; senão mostra a inicial colorida
+  if (user.fotoPerfil) {
+    return (
+      <div className={`${dim} rounded-full overflow-hidden shrink-0`}>
+        <img
+          src={`${API_BASE}/${user.fotoPerfil}`}
+          alt={user.nome || user.username}
+          className="w-full h-full object-cover"
+        />
+      </div>
+    )
+  }
+
   return (
     <div
       className={`${dim} rounded-full flex items-center justify-center text-white font-bold shrink-0`}
@@ -122,18 +129,14 @@ function Header() {
 
             {/* PERFIL / LOGIN */}
             {user ? (
-              // Usuário logado: mostra nome + avatar + dropdown
               <div className="relative group">
                 <button className="flex items-center gap-2.5 rounded-full pl-1 pr-3 py-1 hover:bg-slate-800 transition-all active:scale-95">
-                  {/* Avatar */}
                   <div className="ring-2 ring-blue-500/60 rounded-full">
                     <UserAvatar user={user} size="sm" />
                   </div>
-                  {/* Nome */}
                   <span className="text-sm font-semibold text-white max-w-[120px] truncate">
                     {user.nome || user.username}
                   </span>
-                  {/* Chevron */}
                   <svg className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
@@ -158,7 +161,6 @@ function Header() {
                 </div>
               </div>
             ) : (
-              // Não logado: botão de perfil padrão → vai para /login
               <button
                 onClick={() => navigate("/login")}
                 className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-transparent hover:ring-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] active:scale-95 transition-all"

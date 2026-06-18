@@ -1,23 +1,14 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
-  User,
-  Mail,
-  MapPin,
-  FileText,
-  Lock,
-  Eye,
-  EyeOff,
-  Trash2,
-  AlertTriangle,
-  X,
+  User, Mail, MapPin, FileText, Lock, Eye, EyeOff,
+  Trash2, AlertTriangle, X, Camera,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
 const API_BASE = "";
 
-// Mesma lógica de avatar usada no Header, para manter consistência visual
 function avatarColor(username = "") {
   const colors = [
     "#2563eb", "#7c3aed", "#db2777", "#059669", "#d97706",
@@ -34,7 +25,6 @@ export default function Perfil() {
   const navigate = useNavigate();
   const { user, login, logout } = useAuth();
 
-  // ───────────────────────────── Estado: formulário de dados ─────────────────────────────
   const [form, setForm] = useState({
     nome: user?.nome || "",
     email: user?.email || "",
@@ -43,22 +33,24 @@ export default function Perfil() {
   });
   const [salvandoPerfil, setSalvandoPerfil] = useState(false);
 
-  // ───────────────────────────── Estado: troca de senha ─────────────────────────────
+  // ── Foto de perfil ──
+  const [novaFoto, setNovaFoto] = useState(null);
+  const [previewFoto, setPreviewFoto] = useState(null);
+  const fileInputRef = useRef(null);
+
+  // ── Senha ──
   const [senhaForm, setSenhaForm] = useState({
-    senhaAtual: "",
-    novaSenha: "",
-    confirmarSenha: "",
+    senhaAtual: "", novaSenha: "", confirmarSenha: "",
   });
   const [mostrarSenhaAtual, setMostrarSenhaAtual] = useState(false);
   const [mostrarNovaSenha, setMostrarNovaSenha] = useState(false);
   const [salvandoSenha, setSalvandoSenha] = useState(false);
 
-  // ───────────────────────────── Estado: exclusão de conta ─────────────────────────────
+  // ── Exclusão ──
   const [modalExcluirAberto, setModalExcluirAberto] = useState(false);
   const [senhaExclusao, setSenhaExclusao] = useState("");
   const [excluindo, setExcluindo] = useState(false);
 
-  // Enquanto o AuthContext ainda não resolveu quem é o usuário
   if (user === undefined) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
@@ -67,7 +59,6 @@ export default function Perfil() {
     );
   }
 
-  // Se não está logado, não há perfil para mostrar
   if (!user) {
     navigate("/login");
     return null;
@@ -84,40 +75,53 @@ export default function Perfil() {
     setSenhaForm({ ...senhaForm, [e.target.name]: e.target.value });
   }
 
-  // ───────────────────────────── Atualizar dados do perfil ─────────────────────────────
+  function handleSelecionarFoto(e) {
+    const arquivo = e.target.files?.[0];
+    if (!arquivo) return;
+
+    const TIPOS_PERMITIDOS = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    if (!TIPOS_PERMITIDOS.includes(arquivo.type)) {
+      toast.error("Formato inválido. Use JPG, PNG, WEBP ou GIF.");
+      return;
+    }
+    if (arquivo.size > 5 * 1024 * 1024) {
+      toast.error("A imagem deve ter no máximo 5MB.");
+      return;
+    }
+
+    setNovaFoto(arquivo);
+    setPreviewFoto(URL.createObjectURL(arquivo));
+  }
+
+  // ── Salvar perfil (dados + foto juntos via FormData) ──
   async function handleSalvarPerfil(e) {
     e.preventDefault();
 
-    if (!form.nome.trim()) {
-      return toast.error("O nome não pode ficar em branco.");
-    }
-
-    if (form.email && !form.email.includes("@")) {
-      return toast.error("Email inválido.");
-    }
+    if (!form.nome.trim()) return toast.error("O nome não pode ficar em branco.");
+    if (form.email && !form.email.includes("@")) return toast.error("Email inválido.");
 
     try {
       setSalvandoPerfil(true);
 
+      const formData = new FormData();
+      formData.append("nome", form.nome);
+      formData.append("email", form.email);
+      formData.append("bio", form.bio);
+      formData.append("local", form.local);
+      if (novaFoto) formData.append("fotoPerfil", novaFoto);
+
       const res = await fetch(`${API_BASE}/auth/perfil`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({
-          nome: form.nome,
-          email: form.email,
-          bio: form.bio,
-          local: form.local,
-        }),
+        body: formData,
       });
 
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Erro ao atualizar perfil.");
 
-      if (!res.ok) {
-        throw new Error(data.error || "Erro ao atualizar perfil.");
-      }
-
-      login(data); // atualiza o usuário no contexto com os dados retornados
+      login(data);
+      setNovaFoto(null);
+      setPreviewFoto(null);
       toast.success("Perfil atualizado com sucesso!");
     } catch (err) {
       toast.error(err.message || "Erro ao atualizar perfil.");
@@ -126,21 +130,16 @@ export default function Perfil() {
     }
   }
 
-  // ───────────────────────────── Trocar senha ─────────────────────────────
+  // ── Trocar senha ──
   async function handleSalvarSenha(e) {
     e.preventDefault();
 
-    if (!senhaForm.senhaAtual || !senhaForm.novaSenha || !senhaForm.confirmarSenha) {
+    if (!senhaForm.senhaAtual || !senhaForm.novaSenha || !senhaForm.confirmarSenha)
       return toast.error("Preencha todos os campos de senha.");
-    }
-
-    if (senhaForm.novaSenha.length < 4) {
+    if (senhaForm.novaSenha.length < 4)
       return toast.error("A nova senha deve ter pelo menos 4 caracteres.");
-    }
-
-    if (senhaForm.novaSenha !== senhaForm.confirmarSenha) {
+    if (senhaForm.novaSenha !== senhaForm.confirmarSenha)
       return toast.error("As senhas não coincidem.");
-    }
 
     try {
       setSalvandoSenha(true);
@@ -156,10 +155,7 @@ export default function Perfil() {
       });
 
       const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Erro ao alterar senha.");
-      }
+      if (!res.ok) throw new Error(data.error || "Erro ao alterar senha.");
 
       toast.success("Senha alterada com sucesso!");
       setSenhaForm({ senhaAtual: "", novaSenha: "", confirmarSenha: "" });
@@ -170,13 +166,11 @@ export default function Perfil() {
     }
   }
 
-  // ───────────────────────────── Excluir conta ─────────────────────────────
+  // ── Excluir conta ──
   async function handleExcluirConta(e) {
     e.preventDefault();
 
-    if (!senhaExclusao) {
-      return toast.error("Informe sua senha para confirmar.");
-    }
+    if (!senhaExclusao) return toast.error("Informe sua senha para confirmar.");
 
     try {
       setExcluindo(true);
@@ -189,10 +183,7 @@ export default function Perfil() {
       });
 
       const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Erro ao excluir conta.");
-      }
+      if (!res.ok) throw new Error(data.error || "Erro ao excluir conta.");
 
       toast.success("Conta excluída. Sentiremos sua falta!");
       await logout();
@@ -204,19 +195,20 @@ export default function Perfil() {
     }
   }
 
+  // Foto atual: preview da nova selecionada, ou a salva no banco, ou inicial colorida
+  const fotoAtual = previewFoto || (user.fotoPerfil ? `${API_BASE}/${user.fotoPerfil}` : null);
+
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* ═══════════════════════════════════════════════════════════
-          CABEÇALHO DA PÁGINA
-      ═══════════════════════════════════════════════════════════ */}
+
+      {/* ── Cabeçalho ── */}
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-2xl mx-auto px-6 pt-28 pb-8">
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-6">
             <button
               type="button"
               onClick={() => navigate(-1)}
               className="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-all"
-              aria-label="Voltar"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -227,30 +219,72 @@ export default function Perfil() {
             </h1>
           </div>
 
-          {/* Resumo do usuário */}
-          <div className="flex items-center gap-4 mt-2">
-            <div
-              className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-2xl shrink-0 ring-4 ring-slate-100"
-              style={{ backgroundColor: bg }}
-            >
-              {inicial}
+          {/* Avatar com botão de troca */}
+          <div className="flex items-center gap-4">
+            <div className="relative group">
+              {/* Foto ou inicial */}
+              <div
+                className="w-20 h-20 rounded-full flex items-center justify-center text-white font-bold text-3xl shrink-0 ring-4 ring-slate-100 overflow-hidden"
+                style={!fotoAtual ? { backgroundColor: bg } : {}}
+              >
+                {fotoAtual ? (
+                  <img src={fotoAtual} alt="Foto de perfil" className="w-full h-full object-cover" />
+                ) : (
+                  inicial
+                )}
+              </div>
+
+              {/* Overlay de câmera ao passar o mouse */}
+              <label
+                htmlFor="foto-perfil-input"
+                className="absolute inset-0 rounded-full flex items-center justify-center
+                  bg-black/0 group-hover:bg-black/50 transition-all cursor-pointer
+                  opacity-0 group-hover:opacity-100"
+                title="Trocar foto de perfil"
+              >
+                <Camera size={20} className="text-white" />
+              </label>
+
+              <input
+                ref={fileInputRef}
+                id="foto-perfil-input"
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                onChange={handleSelecionarFoto}
+                className="hidden"
+              />
+
+              {/* Bolinha de câmera no canto */}
+              <label
+                htmlFor="foto-perfil-input"
+                className="absolute bottom-0 right-0 w-7 h-7 bg-blue-600 hover:bg-blue-500
+                  rounded-full flex items-center justify-center cursor-pointer
+                  ring-2 ring-white shadow-md transition-colors"
+                title="Trocar foto de perfil"
+              >
+                <Camera size={13} className="text-white" />
+              </label>
             </div>
+
             <div>
               <p className="font-display text-lg font-bold text-slate-900">
                 {user.nome || user.username}
               </p>
               <p className="text-sm text-slate-500">@{user.username}</p>
+              {previewFoto && (
+                <p className="text-xs text-blue-600 font-medium mt-1">
+                  Nova foto selecionada — salve para aplicar
+                </p>
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* ═══════════════════════════════════════════════════════════
-          CONTEÚDO
-      ═══════════════════════════════════════════════════════════ */}
+      {/* ── Conteúdo ── */}
       <div className="max-w-2xl mx-auto px-6 py-8 space-y-6">
 
-        {/* ───────────── Card: Dados do perfil ───────────── */}
+        {/* Card: Dados do perfil */}
         <form
           onSubmit={handleSalvarPerfil}
           className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"
@@ -262,9 +296,7 @@ export default function Perfil() {
           <div className="space-y-4">
             {/* Nome */}
             <div>
-              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">
-                Nome
-              </label>
+              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Nome</label>
               <div className="flex items-center bg-slate-50 rounded-xl px-4 py-3 border border-slate-200 focus-within:border-blue-400 focus-within:bg-white transition-all">
                 <User className="text-slate-400 mr-3 shrink-0" size={18} />
                 <input
@@ -280,9 +312,7 @@ export default function Perfil() {
 
             {/* Email */}
             <div>
-              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">
-                Email
-              </label>
+              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Email</label>
               <div className="flex items-center bg-slate-50 rounded-xl px-4 py-3 border border-slate-200 focus-within:border-blue-400 focus-within:bg-white transition-all">
                 <Mail className="text-slate-400 mr-3 shrink-0" size={18} />
                 <input
@@ -298,9 +328,7 @@ export default function Perfil() {
 
             {/* Local */}
             <div>
-              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">
-                Localização
-              </label>
+              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Localização</label>
               <div className="flex items-center bg-slate-50 rounded-xl px-4 py-3 border border-slate-200 focus-within:border-blue-400 focus-within:bg-white transition-all">
                 <MapPin className="text-slate-400 mr-3 shrink-0" size={18} />
                 <input
@@ -316,9 +344,7 @@ export default function Perfil() {
 
             {/* Bio */}
             <div>
-              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">
-                Bio
-              </label>
+              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Bio</label>
               <div className="flex items-start bg-slate-50 rounded-xl px-4 py-3 border border-slate-200 focus-within:border-blue-400 focus-within:bg-white transition-all">
                 <FileText className="text-slate-400 mr-3 shrink-0 mt-0.5" size={18} />
                 <textarea
@@ -338,8 +364,8 @@ export default function Perfil() {
             type="submit"
             disabled={salvandoPerfil}
             className="font-display w-full mt-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm
-            shadow-lg shadow-blue-600/20 transition-all disabled:opacity-70 disabled:cursor-not-allowed
-            flex items-center justify-center gap-2"
+              shadow-lg shadow-blue-600/20 transition-all disabled:opacity-70 disabled:cursor-not-allowed
+              flex items-center justify-center gap-2"
           >
             {salvandoPerfil ? (
               <>
@@ -353,21 +379,16 @@ export default function Perfil() {
           </button>
         </form>
 
-        {/* ───────────── Card: Trocar senha ───────────── */}
+        {/* Card: Trocar senha */}
         <form
           onSubmit={handleSalvarSenha}
           className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"
         >
-          <h2 className="font-display text-base font-bold text-slate-900 mb-5">
-            Alterar senha
-          </h2>
+          <h2 className="font-display text-base font-bold text-slate-900 mb-5">Alterar senha</h2>
 
           <div className="space-y-4">
-            {/* Senha atual */}
             <div>
-              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">
-                Senha atual
-              </label>
+              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Senha atual</label>
               <div className="flex items-center bg-slate-50 rounded-xl px-4 py-3 border border-slate-200 focus-within:border-blue-400 focus-within:bg-white transition-all">
                 <Lock className="text-slate-400 mr-3 shrink-0" size={18} />
                 <input
@@ -378,21 +399,14 @@ export default function Perfil() {
                   placeholder="Digite sua senha atual"
                   className="w-full bg-transparent outline-none text-slate-900 placeholder-slate-400 text-sm"
                 />
-                <button
-                  type="button"
-                  onClick={() => setMostrarSenhaAtual(!mostrarSenhaAtual)}
-                  className="text-slate-400 hover:text-slate-600 transition-colors ml-2 shrink-0"
-                >
+                <button type="button" onClick={() => setMostrarSenhaAtual(!mostrarSenhaAtual)} className="text-slate-400 hover:text-slate-600 ml-2 shrink-0">
                   {mostrarSenhaAtual ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
             </div>
 
-            {/* Nova senha */}
             <div>
-              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">
-                Nova senha
-              </label>
+              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Nova senha</label>
               <div className="flex items-center bg-slate-50 rounded-xl px-4 py-3 border border-slate-200 focus-within:border-blue-400 focus-within:bg-white transition-all">
                 <Lock className="text-slate-400 mr-3 shrink-0" size={18} />
                 <input
@@ -403,21 +417,14 @@ export default function Perfil() {
                   placeholder="Mínimo 4 caracteres"
                   className="w-full bg-transparent outline-none text-slate-900 placeholder-slate-400 text-sm"
                 />
-                <button
-                  type="button"
-                  onClick={() => setMostrarNovaSenha(!mostrarNovaSenha)}
-                  className="text-slate-400 hover:text-slate-600 transition-colors ml-2 shrink-0"
-                >
+                <button type="button" onClick={() => setMostrarNovaSenha(!mostrarNovaSenha)} className="text-slate-400 hover:text-slate-600 ml-2 shrink-0">
                   {mostrarNovaSenha ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
             </div>
 
-            {/* Confirmar nova senha */}
             <div>
-              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">
-                Confirmar nova senha
-              </label>
+              <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Confirmar nova senha</label>
               <div className="flex items-center bg-slate-50 rounded-xl px-4 py-3 border border-slate-200 focus-within:border-blue-400 focus-within:bg-white transition-all">
                 <Lock className="text-slate-400 mr-3 shrink-0" size={18} />
                 <input
@@ -436,8 +443,8 @@ export default function Perfil() {
             type="submit"
             disabled={salvandoSenha}
             className="font-display w-full mt-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm
-            shadow-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed
-            flex items-center justify-center gap-2"
+              shadow-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed
+              flex items-center justify-center gap-2"
           >
             {salvandoSenha ? (
               <>
@@ -451,7 +458,7 @@ export default function Perfil() {
           </button>
         </form>
 
-        {/* ───────────── Card: Zona de perigo ───────────── */}
+        {/* Card: Zona de perigo */}
         <div className="bg-white rounded-2xl p-6 border border-red-100 shadow-sm">
           <h2 className="font-display text-base font-bold text-red-600 mb-1 flex items-center gap-2">
             <AlertTriangle size={18} />
@@ -461,12 +468,11 @@ export default function Perfil() {
             Essa ação é permanente. Todas as suas publicações, comentários e curtidas serão removidos
             e não será possível recuperar sua conta.
           </p>
-
           <button
             type="button"
             onClick={() => setModalExcluirAberto(true)}
             className="font-display w-full py-3.5 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 font-bold text-sm
-            transition-all flex items-center justify-center gap-2"
+              transition-all flex items-center justify-center gap-2"
           >
             <Trash2 size={16} />
             Excluir minha conta
@@ -474,31 +480,20 @@ export default function Perfil() {
         </div>
       </div>
 
-      {/* ═══════════════════════════════════════════════════════════
-          MODAL DE CONFIRMAÇÃO DE EXCLUSÃO
-      ═══════════════════════════════════════════════════════════ */}
+      {/* Modal de confirmação de exclusão */}
       {modalExcluirAberto && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-6">
-          {/* Overlay */}
           <div
             className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
-            onClick={() => {
-              setModalExcluirAberto(false);
-              setSenhaExclusao("");
-            }}
+            onClick={() => { setModalExcluirAberto(false); setSenhaExclusao(""); }}
           />
-
-          {/* Card do modal */}
           <form
             onSubmit={handleExcluirConta}
             className="relative z-10 w-full max-w-sm bg-white rounded-2xl p-6 shadow-2xl"
           >
             <button
               type="button"
-              onClick={() => {
-                setModalExcluirAberto(false);
-                setSenhaExclusao("");
-              }}
+              onClick={() => { setModalExcluirAberto(false); setSenhaExclusao(""); }}
               className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors"
             >
               <X size={20} />
@@ -508,9 +503,7 @@ export default function Perfil() {
               <AlertTriangle className="text-red-600" size={22} />
             </div>
 
-            <h3 className="font-display text-lg font-bold text-slate-900 mb-1">
-              Tem certeza?
-            </h3>
+            <h3 className="font-display text-lg font-bold text-slate-900 mb-1">Tem certeza?</h3>
             <p className="text-sm text-slate-500 mb-5">
               Digite sua senha para confirmar a exclusão permanente da sua conta.
             </p>
@@ -530,10 +523,7 @@ export default function Perfil() {
             <div className="flex gap-3">
               <button
                 type="button"
-                onClick={() => {
-                  setModalExcluirAberto(false);
-                  setSenhaExclusao("");
-                }}
+                onClick={() => { setModalExcluirAberto(false); setSenhaExclusao(""); }}
                 className="flex-1 py-3 rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50 transition-all"
               >
                 Cancelar
@@ -542,7 +532,7 @@ export default function Perfil() {
                 type="submit"
                 disabled={excluindo}
                 className="flex-1 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-sm
-                transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  transition-all disabled:opacity-70 flex items-center justify-center gap-2"
               >
                 {excluindo ? (
                   <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">

@@ -13,6 +13,8 @@ export default defineConfig({
       '/auth': 'http://localhost:3000',
       '/noticias': 'http://localhost:3000',
       '/newsletter': 'http://localhost:3000',
+      '/fotos': 'http://localhost:3000',
+      '/perfil': 'http://localhost:3000',
     }
   }
 })
