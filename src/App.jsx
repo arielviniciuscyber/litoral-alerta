@@ -9,6 +9,7 @@ import Comunidade from "./pages/Comunidade"
 import SobreNos from './pages/SobreNos'
 import Login from './pages/Login'
 import Cadastro from './pages/Cadastro'
+import Perfil from './pages/Perfil'
 import Error404 from "./pages/Error404";
 import Notificacoes from './pages/Notificacoes'
 import { Toaster } from 'react-hot-toast'
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/notificacoes" element={<Notificacoes />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/perfil" element={<Perfil />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </main>

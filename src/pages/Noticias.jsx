@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AdminButton from "../components/AdminButton";
 
 const ITEMS_PER_PAGE = 6;
-const API_BASE = "http://localhost:3000";
+const API_BASE = "";
 
 export default function NewsPage() {
   const [activeTab, setActiveTab] = useState("recentes");

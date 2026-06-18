@@ -16,7 +16,7 @@ export default function Home() {
     setCarregando(true)
 
     try {
-      const res = await fetch("http://localhost:3000/auth/cadastrar", {
+      const res = await fetch("/auth/cadastrar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

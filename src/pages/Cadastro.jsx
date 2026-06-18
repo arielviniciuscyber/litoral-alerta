@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import logo from "../assets/icone-logo.png";
 import BubbleBackground from "../components/BubbleBackground";
 
-const API_BASE = "http://localhost:3000";
+const API_BASE = "";
 
 export default function Cadastro() {
   const navigate = useNavigate();
